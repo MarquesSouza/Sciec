@@ -16,8 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait;
-    use Notifiable;
+    use TransformableTrait,Notifiable;
     /**
      * The attributes that are mass assignable.
      *
