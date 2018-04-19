@@ -7,35 +7,35 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\TypeUserCreateRequest;
-use App\Http\Requests\TypeUserUpdateRequest;
-use App\Repositories\TypeUserRepository;
-use App\Validators\TypeUserValidator;
+use App\Http\Requests\UserTypeCreateRequest;
+use App\Http\Requests\UserTypeUpdateRequest;
+use App\Repositories\UserTypeRepository;
+use App\Validators\UserTypeValidator;
 
 /**
- * Class TypeUsersController.
+ * Class UserTypesController.
  *
  * @package namespace App\Http\Controllers;
  */
-class TypeUsersController extends Controller
+class UserTypesController extends Controller
 {
     /**
-     * @var TypeUserRepository
+     * @var UserTypeRepository
      */
     protected $repository;
 
     /**
-     * @var TypeUserValidator
+     * @var UserTypeValidator
      */
     protected $validator;
 
     /**
-     * TypeUsersController constructor.
+     * UserTypesController constructor.
      *
-     * @param TypeUserRepository $repository
-     * @param TypeUserValidator $validator
+     * @param UserTypeRepository $repository
+     * @param UserTypeValidator $validator
      */
-    public function __construct(TypeUserRepository $repository, TypeUserValidator $validator)
+    public function __construct(UserTypeRepository $repository, UserTypeValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class TypeUsersController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $typeUsers = $this->repository->all();
+        $userTypes = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $typeUsers,
+                'data' => $userTypes,
             ]);
         }
 
-        return view('typeUsers.index', compact('typeUsers'));
+        return view('userTypes.index', compact('userTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  TypeUserCreateRequest $request
+     * @param  UserTypeCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(TypeUserCreateRequest $request)
+    public function store(UserTypeCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $typeUser = $this->repository->create($request->all());
+            $userType = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'TypeUser created.',
-                'data'    => $typeUser->toArray(),
+                'message' => 'UserType created.',
+                'data'    => $userType->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class TypeUsersController extends Controller
      */
     public function show($id)
     {
-        $typeUser = $this->repository->find($id);
+        $userType = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $typeUser,
+                'data' => $userType,
             ]);
         }
 
-        return view('typeUsers.show', compact('typeUser'));
+        return view('userTypes.show', compact('userType'));
     }
 
     /**
@@ -131,32 +131,32 @@ class TypeUsersController extends Controller
      */
     public function edit($id)
     {
-        $typeUser = $this->repository->find($id);
+        $userType = $this->repository->find($id);
 
-        return view('typeUsers.edit', compact('typeUser'));
+        return view('userTypes.edit', compact('userType'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  TypeUserUpdateRequest $request
+     * @param  UserTypeUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(TypeUserUpdateRequest $request, $id)
+    public function update(UserTypeUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $typeUser = $this->repository->update($request->all(), $id);
+            $userType = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'TypeUser updated.',
-                'data'    => $typeUser->toArray(),
+                'message' => 'UserType updated.',
+                'data'    => $userType->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class TypeUsersController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'TypeUser deleted.',
+                'message' => 'UserType deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'TypeUser deleted.');
+        return redirect()->back()->with('message', 'UserType deleted.');
     }
 }

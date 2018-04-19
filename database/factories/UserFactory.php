@@ -27,12 +27,12 @@ $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Entities\UserTypeUser::class, function (Faker\Generator $faker) {
     return [
-        'id_user' => $faker->numberBetween(1,5),
-        'id_type_user' => $faker->numberBetween(1,3),
+        'user_id' => $faker->numberBetween(1,5),
+        'user_type_id' => $faker->numberBetween(1,3),
         'status' => $faker->boolean,
     ];
 });
-$factory->define(App\Entities\TypeUser::class, function (Faker\Generator $faker) {
+$factory->define(App\Entities\UserType::class, function (Faker\Generator $faker) {
     return [
         'nome' => $faker->sentence,
         'descricao' => $faker->sentence,
