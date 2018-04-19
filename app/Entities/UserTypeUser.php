@@ -20,9 +20,8 @@ class UserTypeUser extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [ 'id_users',
-                            'id_type_users',
+    protected $fillable = [ 'user_id',
+                            'user_type_id',
                             'status'
                             ];
-
 }
