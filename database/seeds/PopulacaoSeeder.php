@@ -14,7 +14,7 @@ class PopulacaoSeeder extends Seeder
         factory(\App\Entities\User::class, 5)->create();
         \App\Entities\UserType::create([
             'nome' => 'Admisnistrador',
-            'descricao' => 'admisnistrador',
+            'descricao' => 'Admisnistrador',
             'status' => '1',
         ]);
         \App\Entities\UserType::create([

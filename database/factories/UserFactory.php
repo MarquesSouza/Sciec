@@ -27,8 +27,8 @@ $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Entities\UserTypeUser::class, function (Faker\Generator $faker) {
     return [
-        'id_user' => $faker->numberBetween(1,5),
-        'id_user_type' => $faker->numberBetween(1,3),
+        'user_id' => $faker->numberBetween(1,5),
+        'user_type_id' => $faker->numberBetween(1,3),
         'status' => $faker->boolean,
     ];
 });
