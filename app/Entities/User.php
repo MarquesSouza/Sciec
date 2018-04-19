@@ -1,14 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
+use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
-    use Notifiable;
 
+/**
+ * Class User.
+ *
+ * @package namespace App\Entities;
+ */
+class User extends Authenticatable implements Transformable
+{
+    use TransformableTrait,Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -17,12 +25,6 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
