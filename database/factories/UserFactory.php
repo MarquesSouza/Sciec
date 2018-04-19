@@ -14,10 +14,10 @@
 $factory->define(App\Entities\User::class, function (Faker\Generator $faker) {
     static $password;
     return [
-        'name' => $faker->name,
+        'nome' => $faker->name,
         'cpf'  => $faker->unique()->numberBetween(1,999999999),
         'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'senha' => $password ?: $password = bcrypt('secret'),
         'celular' => $faker->phoneNumber,
         'status' => $faker->boolean,
         'remember_token' => str_random(10),
