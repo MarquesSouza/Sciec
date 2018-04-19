@@ -3,23 +3,23 @@
 namespace App\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Entities\TypeUser;
+use App\Entities\UserType;
 
 /**
- * Class TypeUserTransformer.
+ * Class UserTypeTransformer.
  *
  * @package namespace App\Transformers;
  */
-class TypeUserTransformer extends TransformerAbstract
+class UserTypeTransformer extends TransformerAbstract
 {
     /**
-     * Transform the TypeUser entity.
+     * Transform the UserType entity.
      *
-     * @param \App\Entities\TypeUser $model
+     * @param \App\Entities\UserType $model
      *
      * @return array
      */
-    public function transform(TypeUser $model)
+    public function transform(UserType $model)
     {
         return [
             'id'         => (int) $model->id,
