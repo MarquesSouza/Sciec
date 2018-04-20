@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="senha" class="col-md-4 control-label">senha</label>
+                            <label for="password" class="col-md-4 control-label">password</label>
 
                             <div class="col-md-6">
-                                <input id="senha" type="password" class="form-control" name="senha" required>
+                                <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
