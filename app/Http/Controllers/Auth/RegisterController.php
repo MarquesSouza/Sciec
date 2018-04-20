@@ -73,6 +73,7 @@ class RegisterController extends Controller
             'cpf'=> $data['cpf'],
             'status'=>'1',
             'celular'=> $data['celular'],
+            'remember_token' => str_random(10),
         ]);
     }
 }
