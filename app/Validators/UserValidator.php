@@ -19,17 +19,17 @@ class UserValidator extends LaravelValidator
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'nome'=>'required|min:3|max:100',
+            'name'=>'required|min:3|max:100',
             'email'=>'email|unique:users,email',
-            'cpf'=>'required|cpf|unique:users,cpf',
-            'senha'=>'alpha_num|between:6,20|Confirmed',
-            'senha' => 'alpha_num|between:6,20',
-            'celular'=>'required|celular_com_ddd',
+           'cpf'=>'required|cpf|unique:users,cpf',
+           'password'=>'alpha_num|between:6,20|Confirmed',
+           'password' => 'alpha_num|between:6,20',
+           'celular'=>'required|celular_com_ddd',
              ],
         ValidatorInterface::RULE_UPDATE => [
-            'nome'=>'required|min:3|max:100',
-            'senha'=> 'alpha_num|between:6,20|Confirmed',
-            'senha' => 'alpha_num|between:6,20',
+            'name'=>'required|min:3|max:100',
+           'password'=> 'alpha_num|between:6,20|Confirmed',
+            'password' => 'alpha_num|between:6,20',
             'email'=>'email|unique:users,email',
             'celular'=>'required|celular_com_ddd',
         ],

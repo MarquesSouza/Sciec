@@ -24,7 +24,32 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('cpf') ? ' has-error' : '' }}">
+                            <label for="cpf" class="col-md-4 control-label">CPF</label>
 
+                            <div class="col-md-6">
+                                <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" required autofocus>
+
+                                @if ($errors->has('cpf'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('cpf') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('celular') ? ' has-error' : '' }}">
+                            <label for="celular" class="col-md-4 control-label">Celular</label>
+
+                            <div class="col-md-6">
+                                <input id="celular" type="text" class="form-control" name="celular" value="{{ old('celular') }}" required autofocus>
+
+                                @if ($errors->has('celular'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('celular') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -38,6 +63,7 @@
                                 @endif
                             </div>
                         </div>
+                        <input for="status" type="hidden" name="status" value="1"/>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

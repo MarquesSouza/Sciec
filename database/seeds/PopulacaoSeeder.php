@@ -14,10 +14,10 @@ class PopulacaoSeeder extends Seeder
         factory(\App\Entities\User::class, 5)->create();
 
         \App\Entities\User::create([
-            'nome' => 'participante',
+            'name' => 'participante',
             'email' => 'participante@ifto.com',
             'cpf' => '05868249100',
-            'senha' => bcrypt('123123123'),
+            'password' => bcrypt('123123123'),
             'celular' => '727.819.4134',
             'status' => '1',
             'remember_token' => str_random(10),

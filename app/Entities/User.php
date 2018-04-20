@@ -23,11 +23,11 @@ class User extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $fillable = [ 'nome',
+    protected $fillable = [ 'name',
                             'email',
-                            'senha',
+                            'password',
                             'cpf',
-                            'telefone',
+                            'celular',
                             'status',
                             'remember_token',
     ];
