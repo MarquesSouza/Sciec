@@ -18,6 +18,21 @@ Route::get('/', function () {
 
 });
 Auth::routes();
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('token', function (){
+    $http = new GuzzleHttp\Client;
+    $response = $http->post('http://public.test/oauth/token', [
+        'form_params' => [
+            'grant_type' => 'authorization_code',
+            'client_id' => '2',
+            'client_secret' => 'WaZHjGmlb20UjQ0bQ4XEAOrCLcFeaatAfVbdizgP',
+            'username' => 'marques',
+            'password' => '123456',
+            'scope' => '',
+        ],
+    ]);
+    return json_decode((string) $response->getBody(), true);
+});
+
