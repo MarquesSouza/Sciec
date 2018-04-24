@@ -36,7 +36,10 @@ class User extends Authenticatable implements Transformable
                             'remember_token',
     ];
 
-    public function tipoUser(){
-        return $this->belongsToMany(UserType::class,'user_type_users','user_id','user_type_id');
+
+    public function tipoUsuario(){
+        return $this->belongsToMany(UserType::class, 'user_type_users');
     }
+
+
 }
