@@ -24,8 +24,9 @@ class UserType extends Model implements Transformable
                             'descricao',
                             'status',
     ];
-    public function user(){
-        return $this->belongsToMany(User::class,'user_type_users','user_type_id','user_id');
+
+    public function usuario(){
+        return $this->belongsToMany(User::class, 'user_type_users');
     }
 
 }
