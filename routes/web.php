@@ -36,3 +36,5 @@ Route::get('token', function (){
     return json_decode((string) $response->getBody(), true);
 });
 
+Route::post('api/login', 'Auth\AuthApiLoginController@authenticated');
+
