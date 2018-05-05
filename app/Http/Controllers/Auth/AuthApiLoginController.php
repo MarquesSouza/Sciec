@@ -15,7 +15,8 @@ class AuthApiLoginController extends Controller
     protected function authenticated(Request $request, User $user)
     {
         // implement your user role retrieval logic, for example retrieve from `roles` database table
-        $user = $user->find(1);
+        $user = $user->where('email', $request->username)->get()->first();
+
         $tipo =  $user->tipoUsuario;
 
         foreach ($tipo as $t){
@@ -25,13 +26,13 @@ class AuthApiLoginController extends Controller
 
 
         // grant scopes based on the role that we get previously
-        if ($t == 2) {
+        if ($t == 1) {
             $request->request->add([
-                'scope' => 'manage-order' // grant manage order scope for user with admin role
+                'scope' => 'administrador' // grant manage order scope for user with admin role
             ]);
         } else {
             $request->request->add([
-                'scope' => 'read-only-order' // read-only order scope for other user role
+                'scope' => 'participante' // read-only order scope for other user role
             ]);
         }
 
