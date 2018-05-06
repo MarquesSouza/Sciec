@@ -32,8 +32,8 @@ class AuthServiceProvider extends ServiceProvider
          */
 
         Passport::tokensCan([
-            'manage-order' => 'Manage order scope',
-            'read-only-order' => 'Read only order scope'
+            'administrador' => 'scope do administrador',
+            'participante' => 'scope do participante'
         ]);
 
     }
