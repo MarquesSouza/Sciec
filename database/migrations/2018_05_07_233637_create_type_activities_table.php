@@ -17,7 +17,9 @@ class CreateTypeActivitiesTable extends Migration
 	{
 		Schema::create('type_activities', function(Blueprint $table) {
             $table->increments('id');
-
+            $table->string('nome');
+            $table->longText('descricao');
+            $table->boolean('status');
             $table->timestamps();
 		});
 	}
