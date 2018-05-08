@@ -40,7 +40,31 @@ $factory->define(App\Entities\UserType::class, function (Faker\Generator $faker)
     ];
 });
 
+$factory->define(App\Entities\Event::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->sentence,
+        'descricao' => $faker->sentence,
+        'local' => $faker->sentence,
+        'data_inicio' => $faker->dateTime,
+        'data_conclusao' => $faker->dateTime,
+        'situacao' => $faker->numberBetween(0,1),
+        'status' => $faker->numberBetween(0,1),
+        'coordenador' => $faker->sentence
+];
+});
 
+$factory->define(App\Entities\Activity::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->sentence,
+        'descricao' => $faker->sentence,
+        'local' => $faker->sentence,
+        'data_inicio' => $faker->dateTime,
+        'data_conclusao' => $faker->dateTime,
+        'horas' => $faker->time(),
+        'qtd_inscritos' => $faker->numerify(),
+        'status' => $faker->numberBetween(0,1)
+];
+});
 
 
 
