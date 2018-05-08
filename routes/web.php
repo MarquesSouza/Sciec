@@ -148,7 +148,17 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
     });
 });
 Route::prefix('user')->group(function () {   /** Rotas do Usuario */
-    Route::prefix('config')->group(function () { /** Rotas de Configuração */
-        Route::get('edit', 'HomeController@index')->name('');
+    Route::prefix('event')->group(function () { /** Rotas de Usuario Evento */
+        Route::get('show', 'EventsController@show')->name('');
+
+        Route::prefix('{id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
+            Route::get('show', 'ActivitiesController@show')->name('');
+            Route::post('insc', 'ActivitiesController@insc')->name('');
+        });
+        Route::prefix('{id}/certificate')->group(function () { /** Rotas de Inscrição na Atividade */
+            Route::get('show', 'ActivitiesController@show')->name('');
+
+        });
     });
+
 });
