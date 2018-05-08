@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('index', function () {
+    return "admin";
+})->middleware(['auth:api', 'scopes:administrador']);
