@@ -20,6 +20,21 @@ class Activity extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'nome',
+        'descricao',
+        'local',
+        'data_inicio',
+        'data_conclusao',
+        'horas',
+        'qtd_inscritos',
+        'status'
+    ];
+    public function tipoAtividade(){
+        return $this->belongsTo(TypeActivity::class, 'type_activities_id');
+    }
 
+    public function evento(){
+        return $this->belongsTo(Event::class, 'events_id');
+    }
 }

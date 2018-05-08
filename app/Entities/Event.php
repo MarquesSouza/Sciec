@@ -20,6 +20,17 @@ class Event extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
-
+    protected $fillable = [
+        'nome',
+        'descricao',
+        'local',
+        'data_inicio',
+        'data_conclusao',
+        'situacao',
+        'status',
+        'coordenador'
+    ];
+    public function instituicao(){
+        return $this->belongsTo(Institution::class,'institutions_id');
+    }
 }
