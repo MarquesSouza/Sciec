@@ -41,5 +41,7 @@ class PopulacaoSeeder extends Seeder
         ]);
 
         factory(App\Entities\UserTypeUser::class, 5)->create();
+        factory(App\Entities\Event::class, 5)->create();
+        factory(App\Entities\Activity::class, 5)->create();
     }
 }
