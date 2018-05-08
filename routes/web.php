@@ -45,7 +45,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
         Route::post('store', 'UserController@store')->name('');
         Route::get('show/{id}', 'UserController@show')->name('');
         Route::get('show/', 'UserController@show')->name('');
-        Route::put('detele/{id}', 'UserController@destroy')->name('');
+        Route::put('delete/{id}', 'UserController@destroy')->name('');
         Route::get('edit/{id}', 'UserController@edit')->name('');
         Route::put('update/{id}', 'UserController@update')->name('');
     });
