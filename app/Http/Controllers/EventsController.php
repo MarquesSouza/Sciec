@@ -70,7 +70,7 @@ class EventsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(EventCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 

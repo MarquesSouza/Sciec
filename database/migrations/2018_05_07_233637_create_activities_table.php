@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateEventsTable.
+ * Class CreateActivitiesTable.
  */
-class CreateEventsTable extends Migration
+class CreateActivitiesTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,16 +15,20 @@ class CreateEventsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('events', function(Blueprint $table) {
+		Schema::create('activities', function(Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
             $table->longText('descricao');
             $table->longText('local');
             $table->dateTime('data_inicio');
             $table->dateTime('data_conclusao');
-            $table->boolean('situacao');
+            $table->time('horas');
+            $table->integer('qtd_inscritos');
             $table->boolean('status');
-            $table->string('coordenador');
+            $table->integer('type_activities_id')->unsigned();
+            $table->foreign('type_activities_id')->references('id')->on('type_activities')->onDelete('cascade');
+            $table->integer('events_id')->unsigned();
+            $table->foreign('events_id')->references('id')->on('events')->onDelete('cascade');
 
             $table->timestamps();
 		});
@@ -37,6 +41,6 @@ class CreateEventsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('events');
+		Schema::drop('activities');
 	}
 }

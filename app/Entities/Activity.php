@@ -28,13 +28,16 @@ class Activity extends Model implements Transformable
         'data_conclusao',
         'horas',
         'qtd_inscritos',
-        'status'
+        'status',
+        'type_activities_id',
+        'events_id'
     ];
-    public function tipoAtividade(){
+
+    public function typeActivities(){
         return $this->belongsTo(TypeActivity::class, 'type_activities_id');
     }
 
-    public function evento(){
+    public function events(){
         return $this->belongsTo(Event::class, 'events_id');
     }
 }

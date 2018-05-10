@@ -49,7 +49,8 @@ $factory->define(App\Entities\Event::class, function (Faker\Generator $faker) {
         'data_conclusao' => $faker->dateTime,
         'situacao' => $faker->numberBetween(0,1),
         'status' => $faker->numberBetween(0,1),
-        'coordenador' => $faker->sentence
+        'institutions_id'=> $faker->numberBetween(1,5),
+        'coordenador' => $faker->sentence,
 ];
 });
 
@@ -62,7 +63,9 @@ $factory->define(App\Entities\Activity::class, function (Faker\Generator $faker)
         'data_conclusao' => $faker->dateTime,
         'horas' => $faker->time(),
         'qtd_inscritos' => $faker->numerify(),
-        'status' => $faker->numberBetween(0,1)
+        'status' => $faker->numberBetween(0,1),
+        'type_activities_id'=> $faker->numberBetween(1,5),
+        'events_id'=> $faker->numberBetween(1,5),
 ];
 });
 

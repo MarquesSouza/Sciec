@@ -70,7 +70,7 @@ class ActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(ActivityCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 

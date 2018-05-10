@@ -28,9 +28,11 @@ class Event extends Model implements Transformable
         'data_conclusao',
         'situacao',
         'status',
+        'institutions_id',
         'coordenador'
+
     ];
-    public function instituicao(){
+    public function institutions(){
         return $this->belongsTo(Institution::class,'institutions_id');
     }
 }
