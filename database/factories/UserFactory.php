@@ -71,3 +71,29 @@ $factory->define(App\Entities\Activity::class, function (Faker\Generator $faker)
 
 
 
+$factory->define(App\Entities\Institution::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->name,
+        'descricao' => $faker->sentence,
+        'site' => $faker->sentence,
+        'email' => $faker->unique()->safeEmail,
+        'telefone' => $faker->phoneNumber,
+        'status' => $faker->boolean,
+    ];
+});
+
+$factory->define(App\Entities\TypeActivity::class, function (Faker\Generator $faker) {
+    return [
+        'nome' => $faker->name,
+        'descricao' => $faker->sentence,
+        'status'=> $faker->numberBetween(0,1),
+    ];
+});
+
+$factory->define(App\Entities\UserActivityType::class, function (Faker\Generator $faker) {
+      return [
+        'nome' => $faker->sentence,
+        'descricao' => $faker->sentence,
+        'status'=> $faker->numberBetween(0,1),
+    ];
+});
