@@ -58,7 +58,8 @@ class EventsController extends Controller
             ]);
         }
 
-        return view('events.index', compact('events'));
+        /*return view('events.index', compact('events'));*/
+        return $events;
     }
 
     /**
@@ -119,7 +120,8 @@ class EventsController extends Controller
             ]);
         }
 
-        return view('events.show', compact('event'));
+        /*return view('events.show', compact('event'));*/
+        return $event;
     }
 
     /**
@@ -133,7 +135,8 @@ class EventsController extends Controller
     {
         $event = $this->repository->find($id);
 
-        return view('events.edit', compact('event'));
+        /*return view('events.edit', compact('event'));*/
+        return $event;
     }
 
     /**
@@ -146,7 +149,7 @@ class EventsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(EventUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 

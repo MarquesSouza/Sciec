@@ -58,7 +58,8 @@ class ActivitiesController extends Controller
             ]);
         }
 
-        return view('activities.index', compact('activities'));
+        /*return view('activities.index', compact('activities'));*/
+        return  $activities;
     }
 
     /**
@@ -119,7 +120,8 @@ class ActivitiesController extends Controller
             ]);
         }
 
-        return view('activities.show', compact('activity'));
+        /*return view('activities.show', compact('activity'));*/
+        return $activity;
     }
 
     /**
@@ -146,7 +148,7 @@ class ActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(ActivityUpdateRequest $request, $id)
+    public function update(Request $request, $id, $event_id)
     {
         try {
 
@@ -200,5 +202,14 @@ class ActivitiesController extends Controller
         }
 
         return redirect()->back()->with('message', 'Activity deleted.');
+    }
+
+    public function frequencia(Request $request, $event_id, $activity_id,$id){
+        $dataForm = ['frequency'=>$request->input('frequency')];
+        $activity=ActivityUser::find($id);
+        $update = $activity->update($dataForm);
+        if($update) {
+            return redirect('event/'.$event_id.'/activity/'.$activity_id.'/frequency');
+        }
     }
 }

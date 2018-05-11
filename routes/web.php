@@ -11,8 +11,6 @@
 |
 */
 
-/*TESTE DE COMIT ROMULO*/
-
 Route::get('/', function () {
     return view('welcome');
 
@@ -108,18 +106,19 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('cad', 'ActivitiesController@cad')->name('');
             Route::post('store', 'ActivitiesController@store')->name('');
             Route::get('index', 'ActivitiesController@index')->name('');
-            Route::get('edit/{id}', 'ActivitiesController@edit')->name('');
-            Route::get('show/{id}', 'ActivitiesController@show')->name('');
+            Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
+            Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{id}', 'ActivitiesController@update')->name('');
-            Route::put('delete/{id}', 'ActivitiesController@destroy')->name('');
-            Route::prefix('{id}/frequency')->group(function () { /** Rotas das Frequencia */
+            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
+            Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
                 Route::get('show/', 'ActivitiesController@show')->name('');
-                Route::put('update/{id}', 'ActivitiesController@update')->name('');
+                Route::put('update/{fe_id}', 'ActivitiesController@update')->name('');
             });
         });
     });
 });
+
 Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
     Route::prefix('event')->group(function () { /** Rotas do Evento*/
         Route::get('cad', 'EventsController@cad')->name('');
@@ -135,14 +134,14 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
             Route::get('cad', 'ActivitiesController@cad')->name('');
             Route::post('store', 'ActivitiesController@store')->name('');
             Route::get('index', 'ActivitiesController@index')->name('');
-            Route::get('edit/{id}', 'ActivitiesController@edit')->name('');
-            Route::get('show/{id}', 'ActivitiesController@show')->name('');
+            Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
+            Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{id}', 'ActivitiesController@update')->name('');
-            Route::put('delete/{id}', 'ActivitiesController@destroy')->name('');
-            Route::prefix('{id}/frequency')->group(function () { /** Rotas das Frequencia */
+            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
+            Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
                 Route::get('show/', 'ActivitiesController@show')->name('');
-                Route::put('update/{id}', 'ActivitiesController@update')->name('');
+                Route::put('update/{fe_id}', 'ActivitiesController@update')->name('');
             });
         });
     });
@@ -160,5 +159,6 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 
         });
     });
-
 });
+
+Route::put('event/update/{id}', 'EventsController@update');
