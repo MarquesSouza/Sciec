@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RepositoryServiceProvider;
+use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -108,9 +110,9 @@ class InstitutionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $institution = $this->repository->find($id);
+        $institution = $this->repository->all();
 
         if (request()->wantsJson()) {
 
@@ -119,7 +121,7 @@ class InstitutionsController extends Controller
             ]);
         }
 
-        return view('institutions.show', compact('institution'));
+        return $institution;
     }
 
     /**

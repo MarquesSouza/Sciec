@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,17 +9,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 /*TESTE DE COMIT ROMULO*/
-
 Route::get('/', function () {
     return view('welcome');
-
 });
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('token', function (){
     $http = new GuzzleHttp\Client;
     $response = $http->post('http://public.test/oauth/token', [
@@ -36,7 +30,10 @@ Route::get('token', function (){
     return json_decode((string) $response->getBody(), true);
 });
 
+
 Route::post('api/login', 'Auth\AuthApiLoginController@authenticated');
+    Route::post('api/client', 'Auth\AuthApiLoginController@unauthenticated');
+
 
 Route::prefix('admin')->group(function () {   /** Rotas do administrador */
     Route::prefix('user')->group(function () { /** Rotas do Controler Usuario */
@@ -103,7 +100,6 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
         Route::get('show/', 'EventsController@show')->name('');
         Route::put('update/{id}', 'EventsController@update')->name('');
         Route::put('delete/{id}', 'EventsController@destroy')->name('');
-
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
             Route::get('cad', 'ActivitiesController@cad')->name('');
             Route::post('store', 'ActivitiesController@store')->name('');
@@ -130,7 +126,6 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
         Route::get('show/', 'EventsController@show')->name('');
         Route::put('update/{id}', 'EventsController@update')->name('');
         Route::put('delete/{id}', 'EventsController@destroy')->name('');
-
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
             Route::get('cad', 'ActivitiesController@cad')->name('');
             Route::post('store', 'ActivitiesController@store')->name('');
@@ -150,15 +145,12 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
 Route::prefix('user')->group(function () {   /** Rotas do Usuario */
     Route::prefix('event')->group(function () { /** Rotas de Usuario Evento */
         Route::get('show', 'EventsController@show')->name('');
-
         Route::prefix('{id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@show')->name('');
             Route::post('insc', 'ActivitiesController@insc')->name('');
         });
         Route::prefix('{id}/certificate')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@show')->name('');
-
         });
     });
-
 });
