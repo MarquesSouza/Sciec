@@ -157,6 +157,8 @@ class EventsController extends Controller
 
             $event = $this->repository->update($request->all(), $id);
 
+
+
             $response = [
                 'message' => 'Event updated.',
                 'data'    => $event->toArray(),
@@ -166,8 +168,8 @@ class EventsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $event;
+          //  return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
