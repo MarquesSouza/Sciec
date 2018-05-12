@@ -58,7 +58,8 @@ class InstitutionsController extends Controller
             ]);
         }
 
-        return view('institutions.index', compact('institutions'));
+        /*return view('institutions.index', compact('institutions'));*/
+        return $institutions;
     }
 
     /**
@@ -70,7 +71,7 @@ class InstitutionsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(InstitutionCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -119,7 +120,8 @@ class InstitutionsController extends Controller
             ]);
         }
 
-        return view('institutions.show', compact('institution'));
+        /*return view('institutions.show', compact('institution'));*/
+        return $institution;
     }
 
     /**
@@ -146,7 +148,7 @@ class InstitutionsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(InstitutionUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 

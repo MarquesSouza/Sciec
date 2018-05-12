@@ -20,6 +20,13 @@ class Institution extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'nome',
+        'descricao',
+        'site',
+        'email',
+        'telefone',
+        'status'
+    ];
 
 }

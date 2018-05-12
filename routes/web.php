@@ -81,7 +81,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::put('update/{id}', 'UserActivityTypesController@update')->name('');
             Route::put('delete/{id}', 'UserActivityTypesController@destroy')->name('');
         });
-        Route::prefix('instution')->group(function () { /** Rotas de Configuração Instituição */
+        Route::prefix('institution')->group(function () { /** Rotas de Configuração Instituição */
             Route::get('cad', 'InstitutionsController@cad')->name('');
             Route::post('store', 'InstitutionsController@store')->name('');
             Route::get('index', 'InstitutionsController@index')->name('');
