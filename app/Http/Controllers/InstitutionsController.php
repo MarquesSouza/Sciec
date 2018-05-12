@@ -88,8 +88,8 @@ class InstitutionsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $institution;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -165,8 +165,8 @@ class InstitutionsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $institution;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -200,7 +200,7 @@ class InstitutionsController extends Controller
                 'deleted' => $deleted,
             ]);
         }
-
-        return redirect()->back()->with('message', 'Institution deleted.');
+        return $id;
+        /*return redirect()->back()->with('message', 'Institution deleted.');*/
     }
 }

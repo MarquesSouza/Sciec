@@ -88,8 +88,8 @@ class EventsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $event;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -203,7 +203,7 @@ class EventsController extends Controller
                 'deleted' => $deleted,
             ]);
         }
-
-        return redirect()->back()->with('message', 'Event deleted.');
+        return $id;
+        /*return redirect()->back()->with('message', 'Event deleted.');*/
     }
 }

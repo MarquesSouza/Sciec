@@ -88,7 +88,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('edit/{id}', 'InstitutionsController@edit')->name('');
             Route::get('show/{id}', 'InstitutionsController@show')->name('');
             Route::get('show/', 'InstitutionsController@show')->name('');
-            Route::put('update/{id}', 'InstitutionsController@update')->name('');
+            Route::post('update/{id}', 'InstitutionsController@update')->name('');
             Route::put('delete/{id}', 'InstitutionsController@destroy')->name('');
         });
     });
@@ -99,7 +99,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
         Route::get('edit/{id}', 'EventsController@edit')->name('');
         Route::get('show/{id}', 'EventsController@show')->name('');
         Route::get('show/', 'EventsController@show')->name('');
-        Route::put('update/{id}', 'EventsController@update')->name('');
+        Route::post('update/{id}', 'EventsController@update')->name('');
         Route::put('delete/{id}', 'EventsController@destroy')->name('');
 
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
@@ -109,7 +109,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
             Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
                 Route::get('show/', 'ActivitiesController@show')->name('');
@@ -127,7 +127,7 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
         Route::get('edit/{id}', 'EventsController@edit')->name('');
         Route::get('show/{id}', 'EventsController@show')->name('');
         Route::get('show/', 'EventsController@show')->name('');
-        Route::put('update/{id}', 'EventsController@update')->name('');
+        Route::post('update/{id}', 'EventsController@update')->name('');
         Route::put('delete/{id}', 'EventsController@destroy')->name('');
 
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
@@ -137,7 +137,7 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
             Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
             Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
                 Route::get('show/', 'ActivitiesController@show')->name('');

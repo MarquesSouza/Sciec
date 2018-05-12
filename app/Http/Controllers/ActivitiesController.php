@@ -88,8 +88,8 @@ class ActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $activity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -165,8 +165,8 @@ class ActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $activity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -200,8 +200,8 @@ class ActivitiesController extends Controller
                 'deleted' => $deleted,
             ]);
         }
-
-        return redirect()->back()->with('message', 'Activity deleted.');
+        return $id;
+        /*return redirect()->back()->with('message', 'Activity deleted.');*/
     }
 
     public function frequencia(Request $request, $event_id, $activity_id,$id){
