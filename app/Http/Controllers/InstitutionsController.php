@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Providers\RepositoryServiceProvider;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -60,7 +58,8 @@ class InstitutionsController extends Controller
             ]);
         }
 
-        return view('institutions.index', compact('institutions'));
+        /*return view('institutions.index', compact('institutions'));*/
+        return $institutions;
     }
 
     /**
@@ -72,7 +71,7 @@ class InstitutionsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(InstitutionCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -110,9 +109,9 @@ class InstitutionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $institution = $this->repository->all();
+        $institution = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
@@ -121,6 +120,7 @@ class InstitutionsController extends Controller
             ]);
         }
 
+        /*return view('institutions.show', compact('institution'));*/
         return $institution;
     }
 
@@ -148,7 +148,7 @@ class InstitutionsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(InstitutionUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
