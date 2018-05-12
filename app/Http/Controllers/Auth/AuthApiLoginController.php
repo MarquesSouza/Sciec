@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class AuthApiLoginController extends Controller
 {
     use AuthenticatesUsers;
+
 
     protected function authenticated(Request $request, User $user)
     {
@@ -43,4 +45,21 @@ class AuthApiLoginController extends Controller
         );
         return Route::dispatch($tokenRequest);
     }
+
+    protected function unauthenticated(Request $request,  User $user)
+    {
+        $dataform = $request->all();
+        $user = $user->create($dataform);
+
+        $this->guard()->login($user);
+
+
+        $tokenRequest = Request::create(
+            '/oauth/clients',
+            'post'
+        );
+
+        return Route::dispatch($tokenRequest);
+    }
+
 }
