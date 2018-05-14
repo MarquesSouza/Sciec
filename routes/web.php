@@ -38,14 +38,14 @@ Route::post('api/login', 'Auth\AuthApiLoginController@authenticated');
 
 Route::prefix('admin')->group(function () {   /** Rotas do administrador */
     Route::prefix('user')->group(function () { /** Rotas do Controler Usuario */
-        Route::get('cad', 'UserController@cad_user')->name('');
-        Route::get('index', 'UserController@index')->name('');
-        Route::post('store', 'UserController@store')->name('');
-        Route::get('show/{id}', 'UserController@show')->name('');
-        Route::get('show/', 'UserController@show')->name('');
-        Route::put('delete/{id}', 'UserController@destroy')->name('');
-        Route::get('edit/{id}', 'UserController@edit')->name('');
-        Route::put('update/{id}', 'UserController@update')->name('');
+        Route::get('cad', 'UsersController@cad_user')->name('');
+        Route::get('index', 'UsersController@index')->name('');
+        Route::post('store', 'UsersController@store')->name('');
+        Route::get('show/{id}', 'UsersController@show')->name('');
+        Route::get('show/', 'UsersController@show')->name('');
+        Route::put('delete/{id}', 'UsersController@destroy')->name('');
+        Route::get('edit/{id}', 'UsersController@edit')->name('');
+        Route::put('update/{id}', 'UsersController@update')->name('');
     });
     Route::prefix('report')->group(function () { /** Rotas de Relatorios */
         Route::get('show', 'HomeController@index')->name('');
@@ -162,3 +162,5 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 });
 
 Route::put('event/update/{id}', 'EventsController@update');
+
+Route::put('user/update/{id}', 'UsersController@update');

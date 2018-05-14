@@ -72,8 +72,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'cpf'=> $data['cpf'],
             'status'=>'1',
-            'celular'=> $data['celular']
-           /* 'remember_token' => str_random(10),*/
+            'celular'=> $data['celular'],
+            'remember_token' => str_random(10)
         ]);
 
         $dataform = $data['tipousuario'];
