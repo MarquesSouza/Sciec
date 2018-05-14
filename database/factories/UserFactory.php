@@ -97,3 +97,19 @@ $factory->define(App\Entities\UserActivityType::class, function (Faker\Generator
         'status'=> $faker->numberBetween(0,1),
     ];
 });
+
+$factory->define(App\Entities\EventsUser::class, function ( Faker\Generator $faker){
+    return [
+      'events_id' => $faker->numberBetween(1,5),
+      'users_id' => $faker->numberBetween(1,5),
+    ];
+});
+
+$factory->define(\App\Entities\UsersActivity::class, function (Faker\Generator $faker){
+    return [
+        'users_id' => $faker->numberBetween(1,5),
+        'activities_id' => $faker->numberBetween(1,5),
+        'presenca' => $faker->boolean,
+        'user_activity_types_id' => $faker->numberBetween(1,5),
+    ];
+});
