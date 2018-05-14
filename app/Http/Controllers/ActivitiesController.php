@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
 use App\Entities\UsersActivity;
 use Illuminate\Http\Request;
 
@@ -190,18 +191,14 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        $dataForm = $request->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Activity deleted.',
-                'deleted' => $deleted,
-            ]);
+        $activity = Activity::find($id);
+        $update = $activity->update($dataForm);
+        if ($update) {
+            return $activity;
         }
-        return $id;
-        /*return redirect()->back()->with('message', 'Activity deleted.');*/
     }
 }

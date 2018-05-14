@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Event;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -192,18 +193,13 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Event deleted.',
-                'deleted' => $deleted,
-            ]);
+        $dataForm = $request->all();
+        $event = Event::find($id);
+        $update = $event->update($dataForm);
+        if($update){
+            return $event;
         }
-        return $id;
-        /*return redirect()->back()->with('message', 'Event deleted.');*/
     }
 }

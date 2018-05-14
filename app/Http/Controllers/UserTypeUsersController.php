@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\UserTypeUser;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -187,18 +188,13 @@ class UserTypeUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'UserTypeUser deleted.',
-                'deleted' => $deleted,
-            ]);
+        $dataForm = $request->all();
+        $userTypeUser = UserTypeUser::find($id);
+        $update = $userTypeUser->update($dataForm);
+        if($update){
+            return $userTypeUser;
         }
-
-        return redirect()->back()->with('message', 'UserTypeUser deleted.');
     }
 }

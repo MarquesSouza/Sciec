@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\UserActivityType;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -187,18 +188,13 @@ class UserActivityTypesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'UserActivityType deleted.',
-                'deleted' => $deleted,
-            ]);
+        $dataForm = $request->all();
+        $userActivityType = UserActivityType::find($id);
+        $update = $userActivityType->update($dataForm);
+        if($update){
+            return $userActivityType;
         }
-        return $id;
-        /*return redirect()->back()->with('message', 'UserActivityType deleted.');*/
     }
 }
