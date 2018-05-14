@@ -118,8 +118,8 @@ class UsersActivitiesController extends Controller
                 'data' => $usersActivity,
             ]);
         }
-
-        return view('usersActivities.show', compact('usersActivity'));
+        return $usersActivity;
+        /*return view('usersActivities.show', compact('usersActivity'));*/
     }
 
     /**
@@ -146,7 +146,7 @@ class UsersActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UsersActivityUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -163,8 +163,8 @@ class UsersActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $usersActivity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {

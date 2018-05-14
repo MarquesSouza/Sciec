@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\UsersActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -202,14 +203,5 @@ class ActivitiesController extends Controller
         }
         return $id;
         /*return redirect()->back()->with('message', 'Activity deleted.');*/
-    }
-
-    public function frequencia(Request $request, $event_id, $activity_id,$id){
-        $dataForm = ['frequency'=>$request->input('frequency')];
-        $activity=ActivityUser::find($id);
-        $update = $activity->update($dataForm);
-        if($update) {
-            return redirect('event/'.$event_id.'/activity/'.$activity_id.'/frequency');
-        }
     }
 }

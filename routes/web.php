@@ -140,8 +140,8 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
             Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
-                Route::get('show/', 'ActivitiesController@show')->name('');
-                Route::put('update/{fe_id}', 'ActivitiesController@update')->name('');
+                Route::get('show/', 'UsersActivitiesController@show')->name('');
+                Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });
         });
     });
