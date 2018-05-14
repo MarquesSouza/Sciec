@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
+use App\Entities\UsersActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -88,8 +90,8 @@ class ActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $activity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -165,8 +167,8 @@ class ActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $activity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -189,27 +191,14 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        $dataForm = $request->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Activity deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'Activity deleted.');
-    }
-
-    public function frequencia(Request $request, $event_id, $activity_id,$id){
-        $dataForm = ['frequency'=>$request->input('frequency')];
-        $activity=ActivityUser::find($id);
+        $activity = Activity::find($id);
         $update = $activity->update($dataForm);
-        if($update) {
-            return redirect('event/'.$event_id.'/activity/'.$activity_id.'/frequency');
+        if ($update) {
+            return $activity;
         }
     }
 }

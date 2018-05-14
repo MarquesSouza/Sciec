@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Institution;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -88,8 +89,8 @@ class InstitutionsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $institution;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -165,8 +166,8 @@ class InstitutionsController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $institution;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -189,18 +190,14 @@ class InstitutionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        $dataForm = $request->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'Institution deleted.',
-                'deleted' => $deleted,
-            ]);
+        $institution = Institution::find($id);
+        $update = $institution->update($dataForm);
+        if ($update) {
+            return $institution;
         }
-
-        return redirect()->back()->with('message', 'Institution deleted.');
     }
 }

@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class UserActivityType.
+ * Class EventsUser.
  *
  * @package namespace App\Entities;
  */
-class UserActivityType extends Model implements Transformable
+class EventsUser extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -21,9 +21,8 @@ class UserActivityType extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'nome',
-        'descricao',
-        'status'
+        'events_id',
+        'users_id'
     ];
 
 }

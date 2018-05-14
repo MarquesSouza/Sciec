@@ -14,7 +14,11 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
+const app = new Vue({
+    el: '#app'
+});
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
@@ -30,8 +34,3 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens.vue')
 );
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
-});

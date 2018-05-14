@@ -2,41 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\UserActivityType;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserActivityTypeCreateRequest;
-use App\Http\Requests\UserActivityTypeUpdateRequest;
-use App\Repositories\UserActivityTypeRepository;
-use App\Validators\UserActivityTypeValidator;
+use App\Http\Requests\EventsUserCreateRequest;
+use App\Http\Requests\EventsUserUpdateRequest;
+use App\Repositories\EventsUserRepository;
+use App\Validators\EventsUserValidator;
 
 /**
- * Class UserActivityTypesController.
+ * Class EventsUsersController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UserActivityTypesController extends Controller
+class EventsUsersController extends Controller
 {
     /**
-     * @var UserActivityTypeRepository
+     * @var EventsUserRepository
      */
     protected $repository;
 
     /**
-     * @var UserActivityTypeValidator
+     * @var EventsUserValidator
      */
     protected $validator;
 
     /**
-     * UserActivityTypesController constructor.
+     * EventsUsersController constructor.
      *
-     * @param UserActivityTypeRepository $repository
-     * @param UserActivityTypeValidator $validator
+     * @param EventsUserRepository $repository
+     * @param EventsUserValidator $validator
      */
-    public function __construct(UserActivityTypeRepository $repository, UserActivityTypeValidator $validator)
+    public function __construct(EventsUserRepository $repository, EventsUserValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -50,46 +49,46 @@ class UserActivityTypesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $userActivityTypes = $this->repository->all();
+        $eventsUsers = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $userActivityTypes,
+                'data' => $eventsUsers,
             ]);
         }
-        return $userActivityTypes;
-        /*return view('userActivityTypes.index', compact('userActivityTypes'));*/
+
+        return view('eventsUsers.index', compact('eventsUsers'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserActivityTypeCreateRequest $request
+     * @param  EventsUserCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(Request $request)
+    public function store(EventsUserCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $userActivityType = $this->repository->create($request->all());
+            $eventsUser = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'UserActivityType created.',
-                'data'    => $userActivityType->toArray(),
+                'message' => 'EventsUser created.',
+                'data'    => $eventsUser->toArray(),
             ];
 
             if ($request->wantsJson()) {
 
                 return response()->json($response);
             }
-            return $userActivityType;
-            /*return redirect()->back()->with('message', $response['message']);*/
+
+            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -111,16 +110,16 @@ class UserActivityTypesController extends Controller
      */
     public function show($id)
     {
-        $userActivityType = $this->repository->find($id);
+        $eventsUser = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $userActivityType,
+                'data' => $eventsUser,
             ]);
         }
-        return $userActivityType;
-        /*return view('userActivityTypes.show', compact('userActivityType'));*/
+
+        return view('eventsUsers.show', compact('eventsUser'));
     }
 
     /**
@@ -132,40 +131,40 @@ class UserActivityTypesController extends Controller
      */
     public function edit($id)
     {
-        $userActivityType = $this->repository->find($id);
+        $eventsUser = $this->repository->find($id);
 
-        return view('userActivityTypes.edit', compact('userActivityType'));
+        return view('eventsUsers.edit', compact('eventsUser'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserActivityTypeUpdateRequest $request
+     * @param  EventsUserUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(Request $request, $id)
+    public function update(EventsUserUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $userActivityType = $this->repository->update($request->all(), $id);
+            $eventsUser = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'UserActivityType updated.',
-                'data'    => $userActivityType->toArray(),
+                'message' => 'EventsUser updated.',
+                'data'    => $eventsUser->toArray(),
             ];
 
             if ($request->wantsJson()) {
 
                 return response()->json($response);
             }
-            return $userActivityType;
-            /*return redirect()->back()->with('message', $response['message']);*/
+
+            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -188,13 +187,18 @@ class UserActivityTypesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $dataForm = $request->all();
-        $userActivityType = UserActivityType::find($id);
-        $update = $userActivityType->update($dataForm);
-        if($update){
-            return $userActivityType;
+        $deleted = $this->repository->delete($id);
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'message' => 'EventsUser deleted.',
+                'deleted' => $deleted,
+            ]);
         }
+
+        return redirect()->back()->with('message', 'EventsUser deleted.');
     }
 }

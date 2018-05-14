@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\TypeActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -187,18 +188,13 @@ class TypeActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'TypeActivity deleted.',
-                'deleted' => $deleted,
-            ]);
+        $dataForm = $request->all();
+        $typeActivity = TypeActivity::find($id);
+        $update = $typeActivity->update($dataForm);
+        if($update){
+            return $typeActivity;
         }
-
-        return redirect()->back()->with('message', 'TypeActivity deleted.');
     }
 }

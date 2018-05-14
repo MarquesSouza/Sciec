@@ -38,14 +38,14 @@ Route::post('api/login', 'Auth\AuthApiLoginController@authenticated');
 
 Route::prefix('admin')->group(function () {   /** Rotas do administrador */
     Route::prefix('user')->group(function () { /** Rotas do Controler Usuario */
-        Route::get('cad', 'UserController@cad_user')->name('');
-        Route::get('index', 'UserController@index')->name('');
-        Route::post('store', 'UserController@store')->name('');
-        Route::get('show/{id}', 'UserController@show')->name('');
-        Route::get('show/', 'UserController@show')->name('');
-        Route::put('delete/{id}', 'UserController@destroy')->name('');
-        Route::get('edit/{id}', 'UserController@edit')->name('');
-        Route::put('update/{id}', 'UserController@update')->name('');
+        Route::get('cad', 'UsersController@cad_user')->name('');
+        Route::get('index', 'UsersController@index')->name('');
+        Route::post('store', 'UsersController@store')->name('');
+        Route::get('show/{id}', 'UsersController@show')->name('');
+        Route::get('show/', 'UsersController@show')->name('');
+        Route::post('delete/{id}', 'UsersController@destroy')->name('');
+        Route::get('edit/{id}', 'UsersController@edit')->name('');
+        Route::post('update/{id}', 'UsersController@update')->name('');
     });
     Route::prefix('report')->group(function () { /** Rotas de Relatorios */
         Route::get('show', 'HomeController@index')->name('');
@@ -58,28 +58,28 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('edit/{id}', 'TypeActivitiesController@edit')->name('');
             Route::get('show/{id}', 'TypeActivitiesController@show')->name('');
             Route::get('show/', 'TypeActivitiesController@show')->name('');
-            Route::put('update/{id}', 'TypeActivitiesController@update')->name('');
-            Route::put('delete/{id}', 'TypeActivitiesController@destroy')->name('');
+            Route::post('update/{id}', 'TypeActivitiesController@update')->name('');
+            Route::post('delete/{id}', 'TypeActivitiesController@destroy')->name('');
         });
-        Route::prefix('type_user')->group(function () { /** Rotas de Configuração tipo de users*/
+        Route::prefix('user_type')->group(function () { /** Rotas de Configuração tipo de users*/
             Route::get('cad', 'UserTypesController@cad')->name('');
             Route::post('store', 'UserTypesController@store')->name('');
             Route::get('index', 'UserTypesController@index')->name('');
             Route::get('edit/{id}', 'UserTypesController@edit')->name('');
             Route::get('show/{id}', 'UserTypesController@show')->name('');
             Route::get('show/', 'UserTypesController@show')->name('');
-            Route::put('update/{id}', 'UserTypesController@update')->name('');
-            Route::put('delete/{id}', 'UserTypesController@destroy')->name('');
+            Route::post('update/{id}', 'UserTypesController@update')->name('');
+            Route::post('delete/{id}', 'UserTypesController@destroy')->name('');
         });
-        Route::prefix('user_activity')->group(function () { /** Rotas de Configuração tipo usuario atividade, dentro do evento */
+        Route::prefix('user_activity_type')->group(function () { /** Rotas de Configuração tipo usuario atividade, dentro do evento */
             Route::get('cad', 'UserActivityTypesController@cad')->name('');
             Route::post('store', 'UserActivityTypesController@store')->name('');
             Route::get('index', 'UserActivityTypesController@index')->name('');
             Route::get('edit/{id}', 'UserActivityTypesController@edit')->name('');
             Route::get('show/{id}', 'UserActivityTypesController@show')->name('');
             Route::get('show/', 'UserActivityTypesController@show')->name('');
-            Route::put('update/{id}', 'UserActivityTypesController@update')->name('');
-            Route::put('delete/{id}', 'UserActivityTypesController@destroy')->name('');
+            Route::post('update/{id}', 'UserActivityTypesController@update')->name('');
+            Route::post('delete/{id}', 'UserActivityTypesController@destroy')->name('');
         });
         Route::prefix('institution')->group(function () { /** Rotas de Configuração Instituição */
             Route::get('cad', 'InstitutionsController@cad')->name('');
@@ -88,8 +88,8 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('edit/{id}', 'InstitutionsController@edit')->name('');
             Route::get('show/{id}', 'InstitutionsController@show')->name('');
             Route::get('show/', 'InstitutionsController@show')->name('');
-            Route::put('update/{id}', 'InstitutionsController@update')->name('');
-            Route::put('delete/{id}', 'InstitutionsController@destroy')->name('');
+            Route::post('update/{id}', 'InstitutionsController@update')->name('');
+            Route::post('delete/{id}', 'InstitutionsController@destroy')->name('');
         });
     });
     Route::prefix('event')->group(function () { /** Rotas do Evento*/
@@ -99,8 +99,8 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
         Route::get('edit/{id}', 'EventsController@edit')->name('');
         Route::get('show/{id}', 'EventsController@show')->name('');
         Route::get('show/', 'EventsController@show')->name('');
-        Route::put('update/{id}', 'EventsController@update')->name('');
-        Route::put('delete/{id}', 'EventsController@destroy')->name('');
+        Route::post('update/{id}', 'EventsController@update')->name('');
+        Route::post('delete/{id}', 'EventsController@destroy')->name('');
 
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
             Route::get('cad', 'ActivitiesController@cad')->name('');
@@ -109,11 +109,11 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
             Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
-            Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
+            Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::post('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
-                Route::get('show/', 'ActivitiesController@show')->name('');
-                Route::put('update/{fe_id}', 'ActivitiesController@update')->name('');
+                Route::get('show/', 'UsersActivitiesController@show')->name('');
+                Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });
         });
     });
@@ -127,8 +127,8 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
         Route::get('edit/{id}', 'EventsController@edit')->name('');
         Route::get('show/{id}', 'EventsController@show')->name('');
         Route::get('show/', 'EventsController@show')->name('');
-        Route::put('update/{id}', 'EventsController@update')->name('');
-        Route::put('delete/{id}', 'EventsController@destroy')->name('');
+        Route::post('update/{id}', 'EventsController@update')->name('');
+        Route::post('delete/{id}', 'EventsController@destroy')->name('');
 
         Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
             Route::get('cad', 'ActivitiesController@cad')->name('');
@@ -137,11 +137,11 @@ Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
             Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
             Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::put('update/{event_id}', 'ActivitiesController@update')->name('');
+            Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
-                Route::get('show/', 'ActivitiesController@show')->name('');
-                Route::put('update/{fe_id}', 'ActivitiesController@update')->name('');
+                Route::get('show/', 'UsersActivitiesController@show')->name('');
+                Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });
         });
     });
@@ -159,7 +159,9 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 
         });
     });
+
 });
 
 Route::put('event/update/{id}', 'EventsController@update');
 Route::put('inst/update/{id}', 'InstitutionsController@update');
+
