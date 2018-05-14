@@ -11,8 +11,6 @@ class PopulacaoSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Entities\User::class, 5)->create();
-
         \App\Entities\User::create([
             'name' => 'participante',
             'email' => 'participante@ifto.com',
@@ -21,8 +19,17 @@ class PopulacaoSeeder extends Seeder
             'celular' => '727.819.4134',
             'status' => '1',
             'remember_token' => str_random(10),
-
         ]);
+        \App\Entities\User::create([
+            'name' => 'guilherme',
+            'email' => 'guilherme@gmail.com',
+            'cpf' => '05718596158',
+            'password' => bcrypt('12136224'),
+            'celular' => '(63)999999999',
+            'status' => '1',
+            'remember_token' => str_random(10),
+        ]);
+        factory(\App\Entities\User::class, 5)->create();
 
         /*---------------Tipos de Usuários---------------------------*/
         \App\Entities\UserType::create([
@@ -61,7 +68,7 @@ class PopulacaoSeeder extends Seeder
             'telefone' => '(63)32150305',
             'status' => '1',
         ]);
-
+        factory(App\Entities\Institution::class, 5)->create();
         /*---------------------------Tipo de Atividade------------------------------------*/
         App\Entities\TypeActivity::create([
             'nome' => 'Palestra',
@@ -78,10 +85,24 @@ class PopulacaoSeeder extends Seeder
             'descricao' => 'Cursos de curta duração para iniciantes',
             'status' => '1',
         ]);
-
-        /*---------------------------------------------------------------*/
+        factory(App\Entities\TypeActivity::class, 5)->create();
+        /*----------------------------Tipo Usuário Atividade-----------------------------------*/
+        App\Entities\UserActivityType::create([
+            'nome' => 'Palestrante',
+            'descricao' => 'Condutor da Palestra',
+            'status' => '1',
+        ]);
+        App\Entities\UserActivityType::create([
+            'nome' => 'Ministrador de Minicurso',
+            'descricao' => 'Condutor do minicurso a ser ministrado',
+            'status' => '1',
+        ]);
+        App\Entities\UserActivityType::create([
+            'nome' => 'Ouvinte',
+            'descricao' => 'Participante das atividades do evento',
+            'status' => '1',
+        ]);
         factory(App\Entities\UserActivityType::class, 5)->create();
-
         /*-----------------------------Eventos----------------------------------*/
         \App\Entities\Event::create([
             'nome' => 'VI JTGTI',
@@ -116,6 +137,7 @@ class PopulacaoSeeder extends Seeder
             'institutions_id'=> '2',
             'coordenador' => 'Gilberto',
         ]);
+        factory(\App\Entities\Event::class, 5)->create();
 
         /*-----------------------------Atividades----------------------------------*/
         App\Entities\Activity::create([
@@ -154,6 +176,34 @@ class PopulacaoSeeder extends Seeder
             'type_activities_id'=> '2',
             'events_id' => '3',
         ]);
+        factory(\App\Entities\Activity::class, 5)->create();
+
+        /*----------------------Usuário Evento-----------------------------------------*/
+        App\Entities\EventsUser::create([
+            'events_id' => '1',
+            'users_id' => '2',
+    ]);
+        App\Entities\EventsUser::create([
+            'events_id' => '2',
+            'users_id' => '1',
+        ]);
+        factory(App\Entities\EventsUser::class, 5)->create();
+
+        /*-----------------------------Usuário Atividade----------------------------------*/
+        App\Entities\UsersActivity::create([
+            'users_id' => '1',
+            'activities_id' => '1',
+            'presenca' => '1',
+            'user_activity_types_id' => '3',
+        ]);
+        App\Entities\UsersActivity::create([
+            'users_id' => '2',
+            'activities_id' => '2',
+            'presenca' => '1',
+            'user_activity_types_id' => '3',
+        ]);
+        factory(\App\Entities\UsersActivity::class, 5)->create();
+
         /*---------------------------------------------------------------*/
     }
 }

@@ -71,14 +71,14 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::put('update/{id}', 'UserTypesController@update')->name('');
             Route::put('delete/{id}', 'UserTypesController@destroy')->name('');
         });
-        Route::prefix('user_activity')->group(function () { /** Rotas de Configuração tipo usuario atividade, dentro do evento */
+        Route::prefix('user_activity_type')->group(function () { /** Rotas de Configuração tipo usuario atividade, dentro do evento */
             Route::get('cad', 'UserActivityTypesController@cad')->name('');
             Route::post('store', 'UserActivityTypesController@store')->name('');
             Route::get('index', 'UserActivityTypesController@index')->name('');
             Route::get('edit/{id}', 'UserActivityTypesController@edit')->name('');
             Route::get('show/{id}', 'UserActivityTypesController@show')->name('');
             Route::get('show/', 'UserActivityTypesController@show')->name('');
-            Route::put('update/{id}', 'UserActivityTypesController@update')->name('');
+            Route::post('update/{id}', 'UserActivityTypesController@update')->name('');
             Route::put('delete/{id}', 'UserActivityTypesController@destroy')->name('');
         });
         Route::prefix('institution')->group(function () { /** Rotas de Configuração Instituição */
