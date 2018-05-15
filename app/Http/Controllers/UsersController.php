@@ -111,7 +111,7 @@ class UsersController extends Controller
                 return response()->json($response);
             }
 
-            return $user;
+            return $response;
             //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
@@ -121,7 +121,7 @@ class UsersController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
         }
     }
 
@@ -198,7 +198,7 @@ class UsersController extends Controller
                 return response()->json($response);
 
             }
-            return $user;
+            return $response;
             //  return redirect()->back()->with('message', $response['message']);
 
         } catch (ValidatorException $e) {
@@ -210,7 +210,7 @@ class UsersController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
         }
     }
 
@@ -224,11 +224,39 @@ class UsersController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $dataForm = $request->all();
-        $user = User::find($id);
-        $update = $user->update($dataForm);
-        if ($update) {
-            return $user;
+        try {
+
+
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
+                'message' => 'User deleted.',
+                'data' => $deleted->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }
