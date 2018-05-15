@@ -97,7 +97,7 @@ class TypeActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
            // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
@@ -175,7 +175,7 @@ class TypeActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
            // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }

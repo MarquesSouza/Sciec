@@ -98,7 +98,7 @@ class UserTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
             //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
@@ -176,7 +176,7 @@ class UserTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
             //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }

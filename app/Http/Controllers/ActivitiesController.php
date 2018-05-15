@@ -99,7 +99,7 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
             //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
@@ -178,7 +178,7 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-            return $e->getMessageBag();
+            return $e;
            // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
