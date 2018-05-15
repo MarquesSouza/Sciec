@@ -39,7 +39,7 @@ class UsersController extends Controller
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
 
     /**
@@ -49,18 +49,18 @@ class UsersController extends Controller
      */
     public function index()
     {
-      /*  $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        /*  $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+          $users = $this->repository->all();
 
-        if (request()->wantsJson()) {
+          if (request()->wantsJson()) {
 
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
+              return response()->json([
+                  'data' => $users,
+              ]);
+          }
 
-        return view('users.index', compact('users'));*/
-      return "user admin";
+          return view('users.index', compact('users'));*/
+        return "user admin";
     }
 
     public function teste()
@@ -98,7 +98,7 @@ class UsersController extends Controller
 
             $response = [
                 'message' => 'User created.',
-                'data'    => $user->toArray(),
+                'data' => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,7 +110,7 @@ class UsersController extends Controller
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -158,7 +158,7 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  UserUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
      * @return Response
      *
@@ -167,13 +167,45 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
 
+        try {
+            $dataForm = $request->all();
+            if( isset($dataForm['email']) )
+                unset($dataForm['email']);
+            if( isset($dataForm['cpf']) )
+                unset($dataForm['cpf']);
+            if( isset($dataForm['password']) )
+                unset($dataForm['password']);
 
-           // $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $user = $this->repository->update($dataForm, $id);
 
+            $dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);
+
+            $response = [
+                'message' => 'User updated.',
+                'data' => $user->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
             return $user;
+            //  return redirect()->back()->with('message', $response['message']);
 
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        }
     }
 
 
@@ -189,7 +221,7 @@ class UsersController extends Controller
         $dataForm = $request->all();
         $user = User::find($id);
         $update = $user->update($dataForm);
-        if($update){
+        if ($update) {
             return $user;
         }
     }
