@@ -97,8 +97,8 @@ class UserActivityTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -133,8 +133,8 @@ class UserActivityTypesController extends Controller
     public function edit($id)
     {
         $userActivityType = $this->repository->find($id);
-
-        return view('userActivityTypes.edit', compact('userActivityType'));
+        return $userActivityType;
+        //return view('userActivityTypes.edit', compact('userActivityType'));
     }
 
     /**
@@ -175,8 +175,8 @@ class UserActivityTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

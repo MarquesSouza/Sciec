@@ -59,7 +59,8 @@ class UserTypesController extends Controller
             ]);
         }
 
-        return view('userTypes.index', compact('userTypes'));
+        //return view('userTypes.index', compact('userTypes'));
+        return $userTypes;
     }
 
     /**
@@ -71,7 +72,7 @@ class UserTypesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserTypeCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -88,8 +89,8 @@ class UserTypesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+//            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -97,8 +98,8 @@ class UserTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -119,8 +120,8 @@ class UserTypesController extends Controller
                 'data' => $userType,
             ]);
         }
-
-        return view('userTypes.show', compact('userType'));
+        return $userType;
+        //return view('userTypes.show', compact('userType'));
     }
 
     /**
@@ -133,8 +134,8 @@ class UserTypesController extends Controller
     public function edit($id)
     {
         $userType = $this->repository->find($id);
-
-        return view('userTypes.edit', compact('userType'));
+        return $userType;
+       // return view('userTypes.edit', compact('userType'));
     }
 
     /**
@@ -164,8 +165,8 @@ class UserTypesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -175,8 +176,8 @@ class UserTypesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

@@ -57,8 +57,8 @@ class EventsUsersController extends Controller
                 'data' => $eventsUsers,
             ]);
         }
-
-        return view('eventsUsers.index', compact('eventsUsers'));
+        return $eventsUsers;
+       // return view('eventsUsers.index', compact('eventsUsers'));
     }
 
     /**
@@ -87,8 +87,8 @@ class EventsUsersController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -96,8 +96,8 @@ class EventsUsersController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -118,8 +118,8 @@ class EventsUsersController extends Controller
                 'data' => $eventsUser,
             ]);
         }
-
-        return view('eventsUsers.show', compact('eventsUser'));
+        return $eventsUser;
+        //return view('eventsUsers.show', compact('eventsUser'));
     }
 
     /**
@@ -132,8 +132,8 @@ class EventsUsersController extends Controller
     public function edit($id)
     {
         $eventsUser = $this->repository->find($id);
-
-        return view('eventsUsers.edit', compact('eventsUser'));
+        return $eventsUser;
+        //return view('eventsUsers.edit', compact('eventsUser'));
     }
 
     /**
@@ -163,8 +163,8 @@ class EventsUsersController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -174,8 +174,8 @@ class EventsUsersController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
