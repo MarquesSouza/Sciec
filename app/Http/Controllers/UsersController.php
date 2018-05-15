@@ -88,13 +88,18 @@ class UsersController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
+            $request['password']= bcrypt($request->input('password'));
             $user = $this->repository->create($request->all());
+
+            $dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);
+
 
             $response = [
                 'message' => 'User created.',
@@ -106,7 +111,8 @@ class UsersController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return $user;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
