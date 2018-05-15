@@ -39,7 +39,7 @@ class UsersController extends Controller
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
 
     /**
@@ -49,18 +49,18 @@ class UsersController extends Controller
      */
     public function index()
     {
-      /*  $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        /*  $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+          $users = $this->repository->all();
 
-        if (request()->wantsJson()) {
+          if (request()->wantsJson()) {
 
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
+              return response()->json([
+                  'data' => $users,
+              ]);
+          }
 
-        return view('users.index', compact('users'));*/
-      return "user admin";
+          return view('users.index', compact('users'));*/
+        return "user admin";
     }
 
     public function teste()
@@ -88,17 +88,22 @@ class UsersController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
+            $request['password']= bcrypt($request->input('password'));
             $user = $this->repository->create($request->all());
+
+            $dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);
+
 
             $response = [
                 'message' => 'User created.',
-                'data'    => $user->toArray(),
+                'data' => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -106,16 +111,17 @@ class UsersController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
         }
     }
 
@@ -158,42 +164,53 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  UserUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
+
         try {
+            $dataForm = $request->all();
+            if( isset($dataForm['email']) )
+                unset($dataForm['email']);
+            if( isset($dataForm['cpf']) )
+                unset($dataForm['cpf']);
+            if( isset($dataForm['password']) )
+                unset($dataForm['password']);
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $user = $this->repository->update($dataForm, $id);
+
+            $dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);
 
             $response = [
                 'message' => 'User updated.',
-                'data'    => $user->toArray(),
+                'data' => $user->toArray(),
+
             ];
-
             if ($request->wantsJson()) {
-
                 return response()->json($response);
-            }
 
-            return redirect()->back()->with('message', $response['message']);
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
-
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e->getMessageBag();
         }
     }
 
@@ -207,11 +224,39 @@ class UsersController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $dataForm = $request->all();
-        $user = User::find($id);
-        $update = $user->update($dataForm);
-        if($update){
-            return $user;
+        try {
+
+
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
+                'message' => 'User deleted.',
+                'data' => $deleted->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }
