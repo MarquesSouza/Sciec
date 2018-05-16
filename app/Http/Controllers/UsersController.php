@@ -142,8 +142,8 @@ class UsersController extends Controller
                 'data' => $user,
             ]);
         }
-
-        return view('users.show', compact('user'));
+        return $user;
+        //return view('users.show', compact('user'));
     }
 
     /**
@@ -156,8 +156,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = $this->repository->find($id);
-
-        return view('users.edit', compact('user'));
+        return $user;
+       // return view('users.edit', compact('user'));
     }
 
     /**

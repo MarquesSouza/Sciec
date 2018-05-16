@@ -99,8 +99,8 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -136,8 +136,8 @@ class ActivitiesController extends Controller
     public function edit($id)
     {
         $activity = $this->repository->find($id);
-
-        return view('activities.edit', compact('activity'));
+        return $activity;
+        //return view('activities.edit', compact('activity'));
     }
 
     /**
@@ -178,8 +178,8 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -193,12 +193,39 @@ class ActivitiesController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $dataForm = $request->all();
+        try {
 
-        $activity = Activity::find($id);
-        $update = $activity->update($dataForm);
-        if ($update) {
-            return $activity;
+
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
+                'message' => 'Activity deleted.',
+                'data' => $deleted->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }
