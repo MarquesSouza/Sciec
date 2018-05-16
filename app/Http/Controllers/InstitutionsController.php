@@ -192,12 +192,39 @@ class InstitutionsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $dataForm = $request->all();
+        try {
 
-        $institution = Institution::find($id);
-        $update = $institution->update($dataForm);
-        if ($update) {
-            return $institution;
+
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
+                'message' => 'Institution deleted.',
+                'data' => $deleted->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }

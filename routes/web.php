@@ -119,7 +119,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
     });
 });
 
-Route::prefix('orga')->group(function () {   /** Rotas do Organizador */
+Route::prefix('org')->group(function () {   /** Rotas do Organizador */
     Route::prefix('event')->group(function () { /** Rotas do Evento*/
         Route::get('cad', 'EventsController@cad')->name('');
         Route::post('store', 'EventsController@store')->name('');

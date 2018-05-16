@@ -190,11 +190,39 @@ class UserTypesController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $dataForm = $request->all();
-        $userType = UserType::find($id);
-        $update = $userType->update($dataForm);
-        if($update){
-            return $userType;
+        try {
+
+
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
+                'message' => 'UserType deleted.',
+                'data' => $deleted->toArray(),
+
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }
