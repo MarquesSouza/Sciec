@@ -87,7 +87,7 @@ class UsersController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -163,13 +163,25 @@ class UsersController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
+            $dataForm = $request->all();
+            if( isset($dataForm['email']) )
+                unset($dataForm['email']);
+            if( isset($dataForm['cpf']) )
+                unset($dataForm['cpf']);
+            if( isset($dataForm['password']) )
+                unset($dataForm['password']);
+
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $user = $this->repository->update($dataForm, $id);
+
+            $dataform = $request['tipousuario'];
+
+            $user->tipoUsuario()->sync($dataform);
 
             $response = [
                 'message' => 'User updated.',
@@ -180,8 +192,8 @@ class UsersController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $user;
+           // return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
