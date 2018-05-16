@@ -163,5 +163,7 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 });
 
 Route::put('event/update/{id}', 'EventsController@update');
-Route::put('inst/update/{id}', 'InstitutionsController@update');
+Route::put('user/update/{id}', 'UsersController@update');
+Route::post('user/store', 'UsersController@store');
+Route::put('user/delete/{id}', 'UsersController@destroy');
 
