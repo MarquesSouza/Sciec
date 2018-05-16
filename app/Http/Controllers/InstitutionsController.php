@@ -98,8 +98,8 @@ class InstitutionsController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -135,8 +135,8 @@ class InstitutionsController extends Controller
     public function edit($id)
     {
         $institution = $this->repository->find($id);
-
-        return view('institutions.edit', compact('institution'));
+        return $institution;
+        //return view('institutions.edit', compact('institution'));
     }
 
     /**
@@ -177,8 +177,8 @@ class InstitutionsController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

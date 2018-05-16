@@ -98,8 +98,8 @@ class EventsController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+       //     return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -180,8 +180,8 @@ class EventsController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
