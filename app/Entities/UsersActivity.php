@@ -21,16 +21,16 @@ class UsersActivity extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'users_id',
-        'activities_id',
+        'user_id',
+        'activity_id',
         'presenca',
         'user_activity_types_id'
     ];
     public function activity(){
-        return $this->belongsTo(Activity::class,'activities_id');
+        return $this->belongsTo(Activity::class,'activity_id');
     }
     public function user(){
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(User::class,'user_id');
     }
     public function userActivityType(){
         return $this->belongsTo(UserActivityType::class,'user_activity_types_id');

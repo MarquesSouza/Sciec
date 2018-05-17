@@ -260,12 +260,15 @@ class UsersController extends Controller
         }
     }
     public function inscricao(Request $request, User $user){
-      $id_user = $user->find(1);
+      $user = $user->find(1);
       //$id_evento = 1;
 
 
         $dataform = $request['atividades'];
-        $user->atividades()->sync($dataform);
+        $retorno = $user->atividades()->sync($dataform);
+
+        return $dataform;
+
 
 
     }

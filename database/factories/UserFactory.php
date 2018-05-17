@@ -29,7 +29,7 @@ $factory->define(App\Entities\UserTypeUser::class, function (Faker\Generator $fa
     return [
         'user_id' => $faker->numberBetween(1,5),
         'user_type_id' => $faker->numberBetween(1,3),
-        'status' => $faker->boolean,
+
     ];
 });
 $factory->define(App\Entities\UserType::class, function (Faker\Generator $faker) {
@@ -64,7 +64,7 @@ $factory->define(App\Entities\Activity::class, function (Faker\Generator $faker)
         'horas' => $faker->time(),
         'qtd_inscritos' => $faker->numerify(),
         'status' => $faker->numberBetween(0,1),
-        'type_activities_id'=> $faker->numberBetween(1,5),
+        'type_activity_id'=> $faker->numberBetween(1,5),
         'events_id'=> $faker->numberBetween(1,5),
 ];
 });
@@ -101,14 +101,14 @@ $factory->define(App\Entities\UserActivityType::class, function (Faker\Generator
 $factory->define(App\Entities\EventsUser::class, function ( Faker\Generator $faker){
     return [
       'events_id' => $faker->numberBetween(1,5),
-      'users_id' => $faker->numberBetween(1,5),
+      'user_id' => $faker->numberBetween(1,5),
     ];
 });
 
 $factory->define(\App\Entities\UsersActivity::class, function (Faker\Generator $faker){
     return [
-        'users_id' => $faker->numberBetween(1,5),
-        'activities_id' => $faker->numberBetween(1,5),
+        'user_id' => $faker->numberBetween(1,5),
+        'activity_id' => $faker->numberBetween(1,5),
         'presenca' => $faker->boolean,
         'user_activity_types_id' => $faker->numberBetween(1,5),
     ];
