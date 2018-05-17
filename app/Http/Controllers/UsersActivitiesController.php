@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\UsersActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -57,8 +58,8 @@ class UsersActivitiesController extends Controller
                 'data' => $usersActivities,
             ]);
         }
-
-        return view('usersActivities.index', compact('usersActivities'));
+        return $usersActivities;
+       // return view('usersActivities.index', compact('usersActivities'));
     }
 
     /**
@@ -87,8 +88,8 @@ class UsersActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -96,8 +97,8 @@ class UsersActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -118,8 +119,8 @@ class UsersActivitiesController extends Controller
                 'data' => $usersActivity,
             ]);
         }
-
-        return view('usersActivities.show', compact('usersActivity'));
+        return $usersActivity;
+        /*return view('usersActivities.show', compact('usersActivity'));*/
     }
 
     /**
@@ -132,8 +133,8 @@ class UsersActivitiesController extends Controller
     public function edit($id)
     {
         $usersActivity = $this->repository->find($id);
-
-        return view('usersActivities.edit', compact('usersActivity'));
+        return $usersActivity;
+        //return view('usersActivities.edit', compact('usersActivity'));
     }
 
     /**
@@ -146,7 +147,7 @@ class UsersActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UsersActivityUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -163,8 +164,8 @@ class UsersActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $usersActivity;
+            /*return redirect()->back()->with('message', $response['message']);*/
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -174,8 +175,8 @@ class UsersActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -187,18 +188,13 @@ class UsersActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        $deleted = $this->repository->delete($id);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'message' => 'UsersActivity deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-
-        return redirect()->back()->with('message', 'UsersActivity deleted.');
+            $dataForm = $request->all();
+            $userActivity = UsersActivity::find($id);
+            $update = $userActivity->update($dataForm);
+            if($update){
+                return $userActivity;
+            }
     }
 }

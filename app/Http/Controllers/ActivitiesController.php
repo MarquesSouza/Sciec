@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
+use App\Entities\UsersActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -97,8 +99,8 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -134,8 +136,8 @@ class ActivitiesController extends Controller
     public function edit($id)
     {
         $activity = $this->repository->find($id);
-
-        return view('activities.edit', compact('activity'));
+        return $activity;
+        //return view('activities.edit', compact('activity'));
     }
 
     /**
@@ -176,8 +178,8 @@ class ActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -189,27 +191,41 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
                 'message' => 'Activity deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
-        return $id;
-        /*return redirect()->back()->with('message', 'Activity deleted.');*/
-    }
+                'data' => $deleted->toArray(),
 
-    public function frequencia(Request $request, $event_id, $activity_id,$id){
-        $dataForm = ['frequency'=>$request->input('frequency')];
-        $activity=ActivityUser::find($id);
-        $update = $activity->update($dataForm);
-        if($update) {
-            return redirect('event/'.$event_id.'/activity/'.$activity_id.'/frequency');
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
         }
     }
 }

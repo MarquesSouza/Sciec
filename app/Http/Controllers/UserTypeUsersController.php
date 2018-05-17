@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\UserTypeUser;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -57,8 +58,8 @@ class UserTypeUsersController extends Controller
                 'data' => $userTypeUsers,
             ]);
         }
-
-        return view('userTypeUsers.index', compact('userTypeUsers'));
+        return $userTypeUsers;
+       // return view('userTypeUsers.index', compact('userTypeUsers'));
     }
 
     /**
@@ -87,8 +88,8 @@ class UserTypeUsersController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -96,8 +97,8 @@ class UserTypeUsersController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -118,8 +119,8 @@ class UserTypeUsersController extends Controller
                 'data' => $userTypeUser,
             ]);
         }
-
-        return view('userTypeUsers.show', compact('userTypeUser'));
+        return $userTypeUser;
+        //return view('userTypeUsers.show', compact('userTypeUser'));
     }
 
     /**
@@ -132,8 +133,8 @@ class UserTypeUsersController extends Controller
     public function edit($id)
     {
         $userTypeUser = $this->repository->find($id);
-
-        return view('userTypeUsers.edit', compact('userTypeUser'));
+        return $userTypeUser;
+        //return view('userTypeUsers.edit', compact('userTypeUser'));
     }
 
     /**
@@ -163,8 +164,8 @@ class UserTypeUsersController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -174,8 +175,8 @@ class UserTypeUsersController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -187,18 +188,41 @@ class UserTypeUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
                 'message' => 'UserTypeUser deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
+                'data' => $deleted->toArray(),
 
-        return redirect()->back()->with('message', 'UserTypeUser deleted.');
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
+        }
     }
 }

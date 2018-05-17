@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\TypeActivity;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -57,8 +58,8 @@ class TypeActivitiesController extends Controller
                 'data' => $typeActivities,
             ]);
         }
-
-        return view('typeActivities.index', compact('typeActivities'));
+        return $typeActivities;
+       // return view('typeActivities.index', compact('typeActivities'));
     }
 
     /**
@@ -87,8 +88,8 @@ class TypeActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+           // return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -96,8 +97,8 @@ class TypeActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -118,8 +119,8 @@ class TypeActivitiesController extends Controller
                 'data' => $typeActivity,
             ]);
         }
-
-        return view('typeActivities.show', compact('typeActivity'));
+        return $typeActivity;
+        //return view('typeActivities.show', compact('typeActivity'));
     }
 
     /**
@@ -132,8 +133,8 @@ class TypeActivitiesController extends Controller
     public function edit($id)
     {
         $typeActivity = $this->repository->find($id);
-
-        return view('typeActivities.edit', compact('typeActivity'));
+        return $typeActivity;
+        //return view('typeActivities.edit', compact('typeActivity'));
     }
 
     /**
@@ -163,8 +164,8 @@ class TypeActivitiesController extends Controller
 
                 return response()->json($response);
             }
-
-            return redirect()->back()->with('message', $response['message']);
+            return $response;
+            //return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -174,8 +175,8 @@ class TypeActivitiesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return $e;
+           // return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -187,18 +188,41 @@ class TypeActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
+            $status = $request->only('status');
+
+            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+
+            $deleted = $this->repository->update($status, $id);
+
+
+
+            $response = [
                 'message' => 'TypeActivity deleted.',
-                'deleted' => $deleted,
-            ]);
-        }
+                'data' => $deleted->toArray(),
 
-        return redirect()->back()->with('message', 'TypeActivity deleted.');
+            ];
+            if ($request->wantsJson()) {
+                return response()->json($response);
+
+            }
+            return $response;
+            //  return redirect()->back()->with('message', $response['message']);
+
+        } catch (ValidatorException $e) {
+
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => $e->getMessageBag()
+                ]);
+            }
+
+            return $e->getMessageBag();
+        }
     }
 }
