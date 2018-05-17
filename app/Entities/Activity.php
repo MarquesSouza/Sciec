@@ -36,6 +36,9 @@ class Activity extends Model implements Transformable
     public function typeActivities(){
         return $this->belongsTo(TypeActivity::class, 'type_activities_id');
     }
+    public function usuario(){
+        return $this->belongsToMany(User::class, 'users_activities');
+    }
 
     public function events(){
         return $this->belongsTo(Event::class, 'events_id');
