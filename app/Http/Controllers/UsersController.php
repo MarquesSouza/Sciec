@@ -259,4 +259,14 @@ class UsersController extends Controller
             return $e->getMessageBag();
         }
     }
+    public function inscricao(Request $request, User $user){
+      $id_user = $user->find(1);
+      //$id_evento = 1;
+
+
+        $dataform = $request['atividades'];
+        $user->atividades()->sync($dataform);
+
+
+    }
 }
