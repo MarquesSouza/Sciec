@@ -151,7 +151,7 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
         Route::get('show', 'EventsController@show')->name('');
 
         Route::prefix('activity')->group(function () { /** Rotas de Inscrição na Atividade */
-            Route::get('show', 'ActivitiesController@show')->name('');
+            Route::get('show', 'ActivitiesController@atividades')->name('');
             Route::post('insc', 'UserController@inscricao')->name('');
         });
         Route::prefix('certificate')->group(function () { /** Rotas de Inscrição na Atividade */
