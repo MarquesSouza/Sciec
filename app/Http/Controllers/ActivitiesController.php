@@ -235,7 +235,7 @@ class ActivitiesController extends Controller
 
 
         /*return view('activities.show', compact('activity'));*/
-        return (new ActivityTransformer())->transform($this->repository->all());
+        return (new ActivityTransformer())->transform($this->repository->find(1));
     }
 
 }
