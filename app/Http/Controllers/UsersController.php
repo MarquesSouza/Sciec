@@ -264,7 +264,7 @@ class UsersController extends Controller
     public function inscricao(Request $request, User $user, Activity $activity)
     {
 
-
+        /* where in array activities*/
         $activity = $activity->whereIn('id', $request->atividades)->get();
 
 
