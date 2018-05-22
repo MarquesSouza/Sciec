@@ -35,4 +35,31 @@ class UsersActivity extends Model implements Transformable
     public function userActivityType(){
         return $this->belongsTo(UserActivityType::class,'user_activity_types_id');
     }
+    public function colisaoAtividade($id_evento){
+        $atividade = Activity::all();
+        $activities = $atividade->where('id_evento', '=', $id_evento);
+        //dd($activities);
+        $activitiesEspelho=$activities;
+        foreach ($activities as $ativi){
+            $dataIni = new \DateTime($ativi->data_inicio);
+            $dataFim = new \DateTime($ativi->data_conclusao);
+            if($ativi->status==1){
+                foreach ($activitiesEspelho as $ativiEspelho){
+                    $dataEspelhoIni = new \DateTime($ativiEspelho->data_inicio);
+                    $dataEspelhoFim = new \DateTime($ativiEspelho->data_conclusao);
+                    if(!(($dataIni>$dataEspelhoIni) && ($dataIni>$dataEspelhoFim)||
+                            ($dataFim<$dataEspelhoIni) && ($dataFim<$dataEspelhoFim)
+                        )&&($ativi->id<>$ativiEspelho->id)){
+                        $data[]=$ativiEspelho->id;
+                    }
+                }
+                if(!isset($data)){
+                }else{
+                    $teste[$ativi->id]=$data;
+                    unset($data);
+                }
+            };
+        };
+        return $teste;
+    }
 }

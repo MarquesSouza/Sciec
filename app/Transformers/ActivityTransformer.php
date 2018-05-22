@@ -23,11 +23,17 @@ class ActivityTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
-        ];
+            'nome'=>$model->nome,
+            'descricao'=>$model->descricao,
+            'local'=>$model->local,
+            'horas'=>$model->horas,
+            'qtd_inscritos'=>$model->qtd_inscritos,
+            'status'=>$model->status,
+            'type_activity_id'=>$model->type_activity_id,
+            'data_inicio'=>  date("d/m/Y",strtotime($model->data_inicio)),
+            'hora_inicio'=>  date( "H:i:s",strtotime($model->data_inicio)),
+            'data_conclusao'=>date("d/m/Y",strtotime($model->data_conclusao)),
+            'hora_conclusao'=>  date( "H:i:s",strtotime($model->data_conclusao)),
+           ];
     }
 }

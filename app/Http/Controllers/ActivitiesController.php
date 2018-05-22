@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Activity;
+use App\Entities\TypeActivity;
 use App\Entities\UsersActivity;
+use App\Transformers\ActivityTransformer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -228,4 +230,18 @@ class ActivitiesController extends Controller
             return $e->getMessageBag();
         }
     }
+    public function atividades()
+    {
+
+
+
+        /*return view('activities.show', compact('activity'));*/
+        return (new ActivityTransformer())->transform($this->repository->find(1));
+    }
+    public  function cad(){
+
+        $tipoAtividade= TypeActivity::all();
+        return $tipoAtividade;
+    }
+
 }
