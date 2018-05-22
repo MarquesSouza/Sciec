@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
 use App\Entities\User;
 use Illuminate\Http\Request;
 
@@ -258,5 +259,28 @@ class UsersController extends Controller
 
             return $e->getMessageBag();
         }
+    }
+
+    public function inscricao(Request $request, User $user, Activity $activity)
+    {
+
+
+        $activity = $activity->whereIn('id', $request->atividades)->get();
+
+
+        $user_activity = [];
+        foreach ($activity as $a){
+            $user_activity[$a->id] = [
+              'presenca' => $request->presenca,
+              'user_activity_types_id' => $request->user_activity_types_id,
+            ];
+        }
+
+        $user = $user->find(1);
+
+        $user->atividades()->sync($user_activity);
+        return $user_activity;
+
+
     }
 }

@@ -25,8 +25,8 @@ class CreateActivitiesTable extends Migration
             $table->time('horas');
             $table->integer('qtd_inscritos');
             $table->boolean('status');
-            $table->integer('type_activities_id')->unsigned();
-            $table->foreign('type_activities_id')->references('id')->on('type_activities')->onDelete('cascade');
+            $table->integer('type_activity_id')->unsigned();
+            $table->foreign('type_activity_id')->references('id')->on('type_activities')->onDelete('cascade');
             $table->integer('events_id')->unsigned();
             $table->foreign('events_id')->references('id')->on('events')->onDelete('cascade');
 

@@ -22,7 +22,7 @@ class EventsUser extends Model implements Transformable
      */
     protected $fillable = [
         'events_id',
-        'users_id'
+        'user_id'
     ];
 
 }

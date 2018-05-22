@@ -29,12 +29,15 @@ class Activity extends Model implements Transformable
         'horas',
         'qtd_inscritos',
         'status',
-        'type_activities_id',
+        'type_activity_id',
         'events_id'
     ];
 
     public function typeActivities(){
-        return $this->belongsTo(TypeActivity::class, 'type_activities_id');
+        return $this->belongsTo(TypeActivity::class, 'type_activity_id');
+    }
+    public function usuario(){
+        return $this->belongsToMany(User::class, 'users_activities');
     }
 
     public function events(){

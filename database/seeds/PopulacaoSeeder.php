@@ -149,7 +149,7 @@ class PopulacaoSeeder extends Seeder
             'horas' => '04:00:00',
             'qtd_inscritos' => '100',
             'status' => '1',
-            'type_activities_id'=> '3',
+            'type_activity_id'=> '3',
             'events_id' => '1',
         ]);
         App\Entities\Activity::create([
@@ -161,7 +161,7 @@ class PopulacaoSeeder extends Seeder
             'horas' => '04:00:00',
             'qtd_inscritos' => '100',
             'status' => '1',
-            'type_activities_id'=> '1',
+            'type_activity_id'=> '1',
             'events_id' => '2',
         ]);
         App\Entities\Activity::create([
@@ -173,7 +173,7 @@ class PopulacaoSeeder extends Seeder
             'horas' => '24:00:00',
             'qtd_inscritos' => '50',
             'status' => '1',
-            'type_activities_id'=> '2',
+            'type_activity_id'=> '2',
             'events_id' => '3',
         ]);
         factory(\App\Entities\Activity::class, 5)->create();
@@ -181,24 +181,24 @@ class PopulacaoSeeder extends Seeder
         /*----------------------Usuário Evento-----------------------------------------*/
         App\Entities\EventsUser::create([
             'events_id' => '1',
-            'users_id' => '2',
+            'user_id' => '2',
     ]);
         App\Entities\EventsUser::create([
             'events_id' => '2',
-            'users_id' => '1',
+            'user_id' => '1',
         ]);
         factory(App\Entities\EventsUser::class, 5)->create();
 
         /*-----------------------------Usuário Atividade----------------------------------*/
         App\Entities\UsersActivity::create([
-            'users_id' => '1',
-            'activities_id' => '1',
+            'user_id' => '1',
+            'activity_id' => '1',
             'presenca' => '1',
             'user_activity_types_id' => '3',
         ]);
         App\Entities\UsersActivity::create([
-            'users_id' => '2',
-            'activities_id' => '2',
+            'user_id' => '2',
+            'activity_id' => '2',
             'presenca' => '1',
             'user_activity_types_id' => '3',
         ]);

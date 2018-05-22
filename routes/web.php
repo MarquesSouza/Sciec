@@ -150,11 +150,11 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
     Route::prefix('event')->group(function () { /** Rotas de Usuario Evento */
         Route::get('show', 'EventsController@show')->name('');
 
-        Route::prefix('{id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
+        Route::prefix('activity')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@show')->name('');
-            Route::post('insc', 'ActivitiesController@insc')->name('');
+            Route::post('insc', 'UserController@inscricao')->name('');
         });
-        Route::prefix('{id}/certificate')->group(function () { /** Rotas de Inscrição na Atividade */
+        Route::prefix('certificate')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@show')->name('');
 
         });
@@ -163,7 +163,6 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 });
 
 Route::put('event/update/{id}', 'EventsController@update');
-Route::put('user/update/{id}', 'UsersController@update');
-Route::post('user/store', 'UsersController@store');
-Route::put('user/delete/{id}', 'UsersController@destroy');
+Route::put('inst/update/{id}', 'InstitutionsController@update');
+Route::post('user/activity/insc', 'UsersController@inscricao');
 
