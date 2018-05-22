@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Event;
+use App\Entities\Institution;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -229,5 +230,10 @@ class EventsController extends Controller
 
             return $e->getMessageBag();
         }
+    }
+    public  function cad(){
+
+        $Institutions= Institution::all();
+        return $Institutions;
     }
 }

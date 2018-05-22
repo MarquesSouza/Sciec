@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Activity;
+use App\Entities\TypeActivity;
 use App\Entities\UsersActivity;
 use App\Transformers\ActivityTransformer;
 use Illuminate\Http\Request;
@@ -236,6 +237,11 @@ class ActivitiesController extends Controller
 
         /*return view('activities.show', compact('activity'));*/
         return (new ActivityTransformer())->transform($this->repository->find(1));
+    }
+    public  function cad(){
+
+        $tipoAtividade= TypeActivity::all();
+        return $tipoAtividade;
     }
 
 }
