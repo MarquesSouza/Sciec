@@ -15,6 +15,7 @@ use App\Http\Requests\ActivityCreateRequest;
 use App\Http\Requests\ActivityUpdateRequest;
 use App\Repositories\ActivityRepository;
 use App\Validators\ActivityValidator;
+use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 /**
  * Class ActivitiesController.
@@ -242,6 +243,22 @@ class ActivitiesController extends Controller
 
         $tipoAtividade= TypeActivity::all();
         return $tipoAtividade;
+    }
+    public function frequencia(){
+        $activity_id=1;
+        $user_activity_type=3;
+        $userActivities = UsersActivity::all();
+        $userActivity = $userActivities->where('activity_id','=',$activity_id)->where('user_activity_types_id','=',$user_activity_type);
+        foreach ($userActivity as $user){
+            $user->user;
+        }
+        foreach ($userActivity as $user){
+            $user->activity;
+        }
+        foreach ($userActivity as $user){
+            $user->userActivityType;
+        }
+        return $userActivity;
     }
 
 }

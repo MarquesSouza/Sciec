@@ -35,6 +35,9 @@ class UsersActivity extends Model implements Transformable
     public function userActivityType(){
         return $this->belongsTo(UserActivityType::class,'user_activity_types_id');
     }
+    public function frequencia($activity_id,$user_activity_type){
+        return 0;
+    }
     public function colisaoAtividade($id_evento){
         $atividade = Activity::all();
         $activities = $atividade->where('id_evento', '=', $id_evento);

@@ -112,7 +112,7 @@ Route::prefix('admin')->group(function () {   /** Rotas do administrador */
             Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::post('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
-                Route::get('show/', 'UsersActivitiesController@show')->name('');
+                Route::get('show/', 'ActivitiesController@frequencia')->name('');
                 Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });
         });
@@ -140,7 +140,7 @@ Route::prefix('org')->group(function () {   /** Rotas do Organizador */
             Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
             Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
             Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
-                Route::get('show/', 'UsersActivitiesController@show')->name('');
+                Route::get('show', 'ActivitiesController@frequencia')->name('');
                 Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });
         });
