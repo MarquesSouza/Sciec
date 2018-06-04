@@ -52,7 +52,6 @@ class EventsController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $events = $this->repository->all();
-
         if (request()->wantsJson()) {
 
             return response()->json([
