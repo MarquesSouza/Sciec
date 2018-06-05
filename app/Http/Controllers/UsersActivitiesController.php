@@ -147,7 +147,7 @@ class UsersActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(Request $request, $fe_id)
+    public function update(Request $request,$event,$id, $fe_id)
     {
         try {
 

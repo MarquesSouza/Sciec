@@ -130,16 +130,16 @@ Route::prefix('org')->group(function () {   /** Rotas do Organizador */
         Route::post('update/{id}', 'EventsController@update')->name('');
         Route::post('delete/{id}', 'EventsController@destroy')->name('');
 
-        Route::prefix('{id}/activity')->group(function () { /** Rotas das Atividade */
+        Route::prefix('{event_id}/activity')->group(function () { /** Rotas das Atividade */
             Route::get('cad', 'ActivitiesController@cad')->name('');
             Route::post('store', 'ActivitiesController@store')->name('');
             Route::get('index', 'ActivitiesController@index')->name('');
-            Route::get('edit/{event_id}', 'ActivitiesController@edit')->name('');
-            Route::get('show/{event_id}', 'ActivitiesController@show')->name('');
+            Route::get('edit/{id}', 'ActivitiesController@edit')->name('');
+            Route::get('show/{id}', 'ActivitiesController@show')->name('');
             Route::get('show/', 'ActivitiesController@show')->name('');
-            Route::post('update/{event_id}', 'ActivitiesController@update')->name('');
-            Route::put('delete/{event_id}', 'ActivitiesController@destroy')->name('');
-            Route::prefix('{event_id}/frequency')->group(function () { /** Rotas das Frequencia */
+            Route::post('update/{id}', 'ActivitiesController@update')->name('');
+            Route::put('delete/{id}', 'ActivitiesController@destroy')->name('');
+            Route::prefix('{id}/frequency')->group(function () { /** Rotas das Frequencia */
                 Route::get('show/{ty_id}', 'ActivitiesController@frequencia')->name('');
                 Route::post('update/{fe_id}', 'UsersActivitiesController@update')->name('');
             });

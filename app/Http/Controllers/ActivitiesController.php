@@ -114,7 +114,7 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($event,$id)
     {
         $activity = $this->repository->find($id);
 
@@ -136,7 +136,7 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($event,$id)
     {
         $activity = $this->repository->find($id);
         return $activity;
@@ -153,7 +153,7 @@ class ActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(Request $request, $id, $event_id)
+    public function update(Request $request,  $event_id,$id)
     {
         try {
 
@@ -194,7 +194,7 @@ class ActivitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request,$event, $id)
     {
         try {
 
