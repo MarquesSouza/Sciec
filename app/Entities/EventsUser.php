@@ -24,5 +24,10 @@ class EventsUser extends Model implements Transformable
         'events_id',
         'user_id'
     ];
-
+    public function evento(){
+        return $this->belongsTo(Event::class,'id');
+    }
+    public function usuario(){
+        return $this->belongsTo(User::class,'id');
+    }
 }

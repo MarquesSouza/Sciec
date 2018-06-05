@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Activity;
+use App\Entities\EventsUser;
 use App\Entities\User;
 use Illuminate\Http\Request;
 
@@ -282,5 +283,17 @@ class UsersController extends Controller
         return $user_activity;
 
 
+    }
+    public function certificado(Request $request,$event_id){
+        $user_id =2; //\Auth::guard('api')->user();
+        $EventUser=EventsUser::all();
+        $user=$EventUser->where('user_id','=', $user_id)->where('events_id','=',$event_id);
+        foreach ($user as $u){
+            $u->evento;
+        }
+        foreach ($user as $u){
+            $u->usuario;
+        }
+        return $user;
     }
 }
