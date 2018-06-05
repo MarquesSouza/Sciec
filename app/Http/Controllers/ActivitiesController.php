@@ -244,11 +244,10 @@ class ActivitiesController extends Controller
         $tipoAtividade= TypeActivity::all();
         return $tipoAtividade;
     }
-    public function frequencia(){
-        $activity_id=1;
-        $user_activity_type=3;
+    public function frequencia($event,$id,$ty_id){
+
         $userActivities = UsersActivity::all();
-        $userActivity = $userActivities->where('activity_id','=',$activity_id)->where('user_activity_types_id','=',$user_activity_type);
+        $userActivity = $userActivities->where('activity_id','=',$id)->where('user_activity_types_id','=',$ty_id);
         foreach ($userActivity as $user){
             $user->user;
         }

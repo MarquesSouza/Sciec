@@ -147,13 +147,13 @@ class UsersActivitiesController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $fe_id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $usersActivity = $this->repository->update($request->all(), $id);
+            $usersActivity = $this->repository->update($request->all(), $fe_id);
 
             $response = [
                 'message' => 'UsersActivity updated.',
