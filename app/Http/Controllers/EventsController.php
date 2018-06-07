@@ -7,6 +7,7 @@ use App\Entities\Institution;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Laravel\Passport\Bridge\User;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\EventCreateRequest;
@@ -240,26 +241,18 @@ class EventsController extends Controller
         $Institutions= Institution::all();
         return $Institutions;
     }
-    public function inscricao(Request $request, User $user, Activity $activity)
+
+    /**
+     * @param $event_id
+     * @return array
+     */
+    public function inscricaoEvento($event_id)
     {
-
-        /* where in array activities*/
-        $activity = $activity->whereIn('id', $request->atividades)->get();
-
-
-        $user_activity = [];
-        foreach ($activity as $a){
-            $user_activity[$a->id] = [
-                'presenca' => $request->presenca,
-                'user_activity_types_id' => $request->user_activity_types_id,
-            ];
-        }
-
-        $user = $user->find(1);
-
-        $user->atividades()->sync($user_activity);
-        return $user_activity;
-
-
+        $id=Auth::user()->id;
+        $user =new User();
+        $user->find($id);
+        $user_evento = ['events_id'=>$event_id];
+        $user->evento()->sync($user_evento);
+        return $user_evento;
     }
 }
