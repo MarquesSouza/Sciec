@@ -12,9 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $title = 'Painel';
+    return view('home.index', compact('title'));
+})->name('painel');
 
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

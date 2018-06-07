@@ -41,6 +41,7 @@ return array(
     'PHPLegends\\PtBrValidator\\' => array($vendorDir . '/phplegends/pt-br-validator/src/pt-br-validator'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\OAuth2\\Server\\' => array($vendorDir . '/league/oauth2-server/src'),
+    'League\\Fractal\\' => array($vendorDir . '/league/fractal/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'League\\Event\\' => array($vendorDir . '/league/event/src'),
     'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
