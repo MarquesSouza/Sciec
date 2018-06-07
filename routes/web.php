@@ -152,7 +152,8 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 
         Route::prefix('{event_id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@atividades')->name('');
-            Route::post('insc', 'UserController@inscricao')->name('');
+            Route::post('insc', 'EventsController@inscricaoEvento')->name('');
+
         });
             Route::get('{event_id}/certificate', 'UsersController@certificado')->name('');
 
