@@ -240,4 +240,26 @@ class EventsController extends Controller
         $Institutions= Institution::all();
         return $Institutions;
     }
+    public function inscricao(Request $request, User $user, Activity $activity)
+    {
+
+        /* where in array activities*/
+        $activity = $activity->whereIn('id', $request->atividades)->get();
+
+
+        $user_activity = [];
+        foreach ($activity as $a){
+            $user_activity[$a->id] = [
+                'presenca' => $request->presenca,
+                'user_activity_types_id' => $request->user_activity_types_id,
+            ];
+        }
+
+        $user = $user->find(1);
+
+        $user->atividades()->sync($user_activity);
+        return $user_activity;
+
+
+    }
 }
