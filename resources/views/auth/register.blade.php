@@ -112,7 +112,7 @@
                     </div>
 
                     <!-- Select Multiple -->
-                    <div class="form-group">
+                   {{-- <div class="form-group">
                         <label class="col-md-4 control-label" for="tipousuario">Tipo usuário</label>
                         <div class="col-md-4">
                             <select id="tipousuario" name="tipousuario[]" class="form-control" multiple="multiple">
@@ -134,7 +134,7 @@
 
                             </select>
                         </div>
-                    </div>
+                    </div>--}}
                     <input type="hidden" id="status" name="status" value="1">
 
                     <div class="form-group">
