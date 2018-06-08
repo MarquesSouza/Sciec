@@ -53,7 +53,7 @@ class EventsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $events = $this->repository->all();
+        $events = $this->repository->all()->where('status','=','1');
 
         foreach ($events as $e){
            $e->institutions->nome;
