@@ -5,7 +5,7 @@
     <article class="events col-md-3 col-sm-6 col-xs-12">
         <img src="https://marketingdeconteudo.com/wp-content/uploads/2017/01/formatos-de-imagem-2.jpg" alt="">
         <div class="name-event"><h2>{{$event->nome}}</h2></div>
-        <a href="" class="btn btn-success">Inscreva-se<i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+        <a href="{{ url('/event/'.$event->id.'/show') }}" class="btn btn-success">Inscreva-se<i class="fa fa-cart-plus" aria-hidden="true"></i></a>
     </article>
     @empty
 
