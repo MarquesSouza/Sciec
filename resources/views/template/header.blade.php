@@ -21,22 +21,36 @@
                     <span class="badge"><!-- poder colocar quantidade de eventos abertos--></span> <b class="caret"></b></a>
 
             </li>
+            @if (Auth::check())
             <li class="dropdown alerts-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
                             class="badge"></span> <b class="caret"></b></a>
 
             </li>
+
+
             <li class="dropdown user-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                        {{ Auth::user()->name }}
+                        <b
                             class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                    <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                    <li class="pull-right">
+
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();"><span class="fa fa-power-off"></span>Log Out
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                 </ul>
             </li>
+            @else
+
+           @endif
+
         </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
