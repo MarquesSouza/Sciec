@@ -253,6 +253,7 @@ class EventsController extends Controller
         $users =User::all();
         $user=$users->find($id);
         $user_evento = ['events_id'=>$event_id];
+
         $user->evento()->sync($user_evento);
 
 
