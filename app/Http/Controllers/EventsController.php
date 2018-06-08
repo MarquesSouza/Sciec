@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Entities\Event;
 use App\Entities\Institution;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Entities\User;
 use App\Http\Requests;
-use Laravel\Passport\Bridge\User;
+//use Laravel\Passport\Bridge\User;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\EventCreateRequest;
 use App\Http\Requests\EventUpdateRequest;
 use App\Repositories\EventRepository;
 use App\Validators\EventValidator;
-use App\Http\Controllers\Auth;
 /**
  * Class EventsController.
  *
@@ -249,11 +250,11 @@ class EventsController extends Controller
     public function inscricaoEvento($event_id)
     {
         $id=Auth::user()->id;
-        $user =new User();
-        $user->find(1);
+        $users =User::all();
+        $user=$users->find($id);
         $user_evento = ['events_id'=>$event_id];
         $user->evento()->sync($user_evento);
-         echo $user_evento;
+         dd($user_evento);
 
     }
 }
