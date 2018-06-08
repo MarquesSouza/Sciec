@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
 use App\Entities\Event;
 use App\Entities\Institution;
 use function GuzzleHttp\Promise\all;
@@ -262,9 +263,10 @@ class EventsController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $event = $this->repository->find($id);
+        $atividade= Activity::all()->where('events_id','=',$id);
 
 
                 /*return view('events.index', compact('events'));*/
-        return view('home.atividade', compact('event'));
+        return view('home.atividade', compact('event','atividade'));
     }
 }
