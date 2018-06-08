@@ -66,7 +66,7 @@ class EventsController extends Controller
         }
 
         /*return view('events.index', compact('events'));*/
-        return $events;
+        return view('events.list-events', compact('events'));
     }
 
     /**
