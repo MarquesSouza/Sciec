@@ -34,7 +34,7 @@
 <script src="{{url('assets/js/tablesorter/tables.js')}}"></script>
 --}}
 
-<div id="wrapper">
+<div >
 
     @include('template.header')
 
