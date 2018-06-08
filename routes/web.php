@@ -16,9 +16,9 @@
     return view('home.index', compact('events'));
 })->name('painel');*/
 
+Route::get('/', 'EventsController@index')->name('painel');
 
 Auth::routes();
-Route::get('/', 'EventsController@index')->name('painel');
 
 Route::get('/home', 'EventsController@index')->name('home');
 
@@ -166,7 +166,7 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
         });
 
 });
-Route::get('/event/{id}/show', 'EventsController@detalhes')->name('home');
+Route::get('/event/{id}/show', 'EventsController@detalhes');
 Route::put('event/update/{id}', 'EventsController@update');
 Route::put('inst/update/{id}', 'InstitutionsController@update');
 Route::post('user/activity/insc', 'UsersController@inscricao');
