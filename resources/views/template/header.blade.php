@@ -15,12 +15,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
 
-        <ul class="nav navbar-nav navbar-right navbar-user">
-            <li class="dropdown messages-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Eventos
-                    <span class="badge"><!-- poder colocar quantidade de eventos abertos--></span> <b class="caret"></b></a>
 
-            </li>
             @if (Auth::check())
             <li class="dropdown alerts-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
@@ -54,9 +49,21 @@
                 </ul>
             </li>
             @else
+            <ul class="nav navbar-nav navbar-right navbar-user">
+                <li class="dropdown messages-dropdown">
+                    <a href="{{ route('login') }}">
+                   <i class="fa fa-sign-in"></i> Login
+                        <span class="badge"></span></a>
 
+                </li>
+                <li class="dropdown messages-dropdown">
+                    <a href="{{ route('register') }}">
+                        <i class="fa fa-user"></i> Cadastre-se
+                        <span class="badge"></span></a>
+
+                </li>
+            </ul>
            @endif
 
-        </ul>
     </div><!-- /.navbar-collapse -->
 </nav>
