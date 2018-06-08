@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    $title = 'Painel';
-    return view('home.index', compact('title'));
-})->name('painel');
+/*Route::get('/', function () {
+    $events = \App\Entities\Event::all();
+    return view('home.index', compact('events'));
+})->name('painel');*/
+
+Route::get('/', 'EventsController@index')->name('painel');
 
 Auth::routes();
 
@@ -150,7 +152,7 @@ Route::prefix('org')->group(function () {   /** Rotas do Organizador */
 Route::prefix('user')->group(function () {   /** Rotas do Usuario */
     Route::prefix('event')->group(function () { /** Rotas de Usuario Evento */
 
-        Route::get('index', 'EventsController@index')->name('index.user');
+
         Route::get('show', 'EventsController@show')->name('');
         Route::get('{event_id}/insc', 'EventsController@inscricaoEvento')->middleware('auth');
 
