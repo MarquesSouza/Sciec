@@ -258,4 +258,12 @@ class EventsController extends Controller
 
 
     }
+    public function detalhes($id)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $events = $this->repository->find($id);
+
+                /*return view('events.index', compact('events'));*/
+        return view('home.index', compact('events'));
+    }
 }
