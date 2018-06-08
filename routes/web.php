@@ -152,6 +152,7 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 
         Route::get('index', 'EventsController@index')->name('index.user');
         Route::get('show', 'EventsController@show')->name('');
+        Route::get('{event_id}/insc', 'EventsController@inscricaoEvento')->name('');
 
         Route::prefix('{event_id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@atividades')->name('');

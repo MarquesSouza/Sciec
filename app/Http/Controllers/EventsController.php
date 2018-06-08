@@ -14,7 +14,7 @@ use App\Http\Requests\EventCreateRequest;
 use App\Http\Requests\EventUpdateRequest;
 use App\Repositories\EventRepository;
 use App\Validators\EventValidator;
-
+use App\Http\Controllers\Auth;
 /**
  * Class EventsController.
  *
@@ -250,9 +250,10 @@ class EventsController extends Controller
     {
         $id=Auth::user()->id;
         $user =new User();
-        $user->find($id);
+        $user->find(1);
         $user_evento = ['events_id'=>$event_id];
         $user->evento()->sync($user_evento);
-        return $user_evento;
+         echo $user_evento;
+
     }
 }
