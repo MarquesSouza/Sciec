@@ -8,17 +8,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{ route('painel') }}">SCIEC</a>
+        <a class="navbar-brand" href="{{ route('home') }}">SCIEC</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
 
+        <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown messages-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Eventos
+                    <span class="badge"><!-- poder colocar quantidade de eventos abertos--></span> <b class="caret"></b></a>
 
 
             @if (Auth::check())
             <li class="dropdown alerts-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
+                <a href="{{ route('logout') }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
                             class="badge"></span> <b class="caret"></b></a>
 
             </li>
@@ -47,9 +51,9 @@
 
                     </li>
                 </ul>
-            </li>
+
             @else
-            <ul class="nav navbar-nav navbar-right navbar-user">
+
                 <li class="dropdown messages-dropdown">
                     <a href="{{ route('login') }}">
                    <i class="fa fa-sign-in"></i> Login
@@ -62,8 +66,8 @@
                         <span class="badge"></span></a>
 
                 </li>
-            </ul>
-           @endif
 
+           @endif
+           </li>
     </div><!-- /.navbar-collapse -->
 </nav>
