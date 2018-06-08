@@ -248,7 +248,7 @@ class EventsController extends Controller
      * @param $event_id
      * @return array
      */
-    public function inscricaoEvento($event_id)
+    public function inscricao(Request $request,$event_id)
     {
         $id=Auth::user()->id;
         $users =User::all();
