@@ -13,64 +13,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
 
-            <li><a href=""><i class="fa fa-dashboard"></i> Painel de controle</a></li>
-            <li class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                    Eventos </a>
-               {{-- <ul class="dropdown-menu">
-                    <li><a href="">Cadastrar Cliente</a></li>
-                    <li><a href="">Visualizar clientes</a></li>
-                </ul>--}}
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                   Produtos / Serviços <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Cadastrar Produto/Serviço </a></li>
-                    <li><a href="">Visualizar produtos</a></li>
-                    <li><a href="">Visualizar serviços</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                    Ordens de Serviço / Orçamentos <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Nova ordem/orçamento </a></li>
-                    <li><a href="#">Visualizar Ordens de serviço</a></li>
-                    <li><a href="">Visualizar Orçamentos</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                    Minha(s) empresa(s) <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Cadastrar empresa</a></li>
-                    <li><a href="">Visualizar empresa</a></li>
-                </ul>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                    Usúarios <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="">Cadastrar usuário</a></li>
-                    <li><a href="">Visualizar usuários</a></li>
-                </ul>
-            </li>
-
-
-
-            <li><a href="#"><i class="fa fa-font"></i> Typography</a></li>
-            <li><a href="#"><i class="fa fa-desktop"></i> Bootstrap Elements</a></li>
-            <li><a href="#"><i class="fa fa-wrench"></i> Bootstrap Grid</a></li>
-            <li><a href="#"><i class="fa fa-file"></i> Blank Page</a></li>
-
-        </ul>
 
         <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown messages-dropdown">
