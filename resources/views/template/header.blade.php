@@ -34,16 +34,22 @@
                         {{ Auth::user()->name }}
                         <b
                             class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li class="pull-right">
 
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();"><span class="fa fa-power-off"></span>Log Out
-                        </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li> <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>Log Out </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}
                         </form>
+                        </li>
+                    </ul>
+
+
                     </li>
                 </ul>
             </li>
