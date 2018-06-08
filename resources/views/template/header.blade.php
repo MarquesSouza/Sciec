@@ -17,12 +17,12 @@
 
             <li><a href=""><i class="fa fa-dashboard"></i> Painel de controle</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
-                    Clientes <b class="caret"></b></a>
-                <ul class="dropdown-menu">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>
+                    Eventos </a>
+               {{-- <ul class="dropdown-menu">
                     <li><a href="">Cadastrar Cliente</a></li>
                     <li><a href="">Visualizar clientes</a></li>
-                </ul>
+                </ul>--}}
             </li>
 
             <li class="dropdown">
