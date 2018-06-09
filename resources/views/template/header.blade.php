@@ -22,7 +22,7 @@
 
             </li>
             <li class="dropdown alerts-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
+                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
                             class="badge"></span> <b class="caret"></b></a>
 
             </li>

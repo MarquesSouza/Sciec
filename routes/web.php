@@ -169,3 +169,5 @@ Route::put('event/update/{id}', 'EventsController@update');
 Route::put('inst/update/{id}', 'InstitutionsController@update');
 Route::post('user/activity/insc', 'UsersController@inscricao');
 
+Route::get('certificado/index', 'UsersController@certificado');
+

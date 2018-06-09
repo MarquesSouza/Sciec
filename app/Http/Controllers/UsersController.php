@@ -263,16 +263,23 @@ class UsersController extends Controller
     }
 
 
-    public function certificado(Request $request,$event_id){
-        $user_id =2; //\Auth::guard('api')->user();
-        $EventUser=EventsUser::all();
-        $user=$EventUser->where('user_id','=', $user_id)->where('events_id','=',$event_id);
-        foreach ($user as $u){
-            $u->evento;
-        }
-        foreach ($user as $u){
-            $u->usuario;
-        }
-        return $user;
+//    public function certificado(Request $request,$event_id){
+//        $user_id =2; //\Auth::guard('api')->user();
+//        $EventUser=EventsUser::all();
+//        $user=$EventUser->where('user_id','=', $user_id)->where('events_id','=',$event_id);
+//        foreach ($user as $u){
+//            $u->evento;
+//        }
+//        foreach ($user as $u){
+//            $u->usuario;
+//        }
+//        return $user;
+//    }
+
+
+    public function certificado()
+    {
+        return view('certificado.certificado', compact('certificado'));
     }
+
 }
