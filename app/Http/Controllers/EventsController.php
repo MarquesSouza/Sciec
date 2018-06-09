@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Activity;
 use App\Entities\Event;
 use App\Entities\Institution;
 use function GuzzleHttp\Promise\all;
@@ -53,7 +54,7 @@ class EventsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $events = $this->repository->all();
+        $events = $this->repository->all()->where('status','=','1');
 
         foreach ($events as $e){
            $e->institutions->nome;
@@ -67,7 +68,7 @@ class EventsController extends Controller
         }
 
         /*return view('events.index', compact('events'));*/
-        return view('events.list-events', compact('events'));
+        return view('home.index', compact('events'));
     }
 
     /**
@@ -247,7 +248,7 @@ class EventsController extends Controller
      * @param $event_id
      * @return array
      */
-    public function inscricaoEvento($event_id)
+    public function inscricao(Request $request,$event_id)
     {
         $id=Auth::user()->id;
         $users =User::all();
@@ -257,5 +258,15 @@ class EventsController extends Controller
         $user->evento()->sync($user_evento);
 
 
+    }
+    public function detalhes($id)
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $event = $this->repository->find($id);
+        $atividade= Activity::all()->where('events_id','=',$id);
+
+
+                /*return view('events.index', compact('events'));*/
+        return view('home.atividade', compact('event','atividade'));
     }
 }

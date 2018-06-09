@@ -8,35 +8,66 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="">SB Admin</a>
+        <a class="navbar-brand" href="{{ route('home') }}">SCIEC</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-
 
         <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown messages-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Eventos
                     <span class="badge"><!-- poder colocar quantidade de eventos abertos--></span> <b class="caret"></b></a>
 
-            </li>
+
+            @if (Auth::check())
             <li class="dropdown alerts-dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
+                <a href="{{ route('logout') }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Certificados <span
                             class="badge"></span> <b class="caret"></b></a>
 
             </li>
+
+
             <li class="dropdown user-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <b
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                        {{ Auth::user()->name }}
+                        <b
                             class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                    <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li class="divider"></li>
+                        <li> <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i>Log Out </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                        </li>
+                    </ul>
+
+
+                    </li>
                 </ul>
-            </li>
-        </ul>
+
+            @else
+
+                <li class="dropdown messages-dropdown">
+                    <a href="{{ route('login') }}">
+                   <i class="fa fa-sign-in"></i> Login
+                        <span class="badge"></span></a>
+
+                </li>
+                <li class="dropdown messages-dropdown">
+                    <a href="{{ route('register') }}">
+                        <i class="fa fa-user"></i> Cadastre-se
+                        <span class="badge"></span></a>
+
+                </li>
+
+           @endif
+           </li>
     </div><!-- /.navbar-collapse -->
 </nav>

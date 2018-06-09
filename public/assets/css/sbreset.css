@@ -46,6 +46,42 @@
 
 
 
+.title{
+    font: 800 2em "Open Sans";
+    margin: 20px 4px;
+    color: #80bc12;
+}
+.events{
+    text-align: center;
+    margin-bottom: 50px;
+}
+.events img{
+
+    width: 250px;
+    height:200px;
+}
+.events h2{
+    font: 200 1em "Open Sans";
+    margin: 6px;
+    text-transform: uppercase;
+}
+.events a{
+
+    text-decoration: none;
+    padding: 6px 85px;
+    max-width: 100%;
+}
+
+.name-event {
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    margin: auto;
+
+}
+
+
+
 
 
 

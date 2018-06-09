@@ -1,13 +1,27 @@
 @extends('template.main')
 
 @section('content')
+    @forelse($events as $event)
+    <article class="events col-md-3 col-sm-6 col-xs-12">
+        <img src="https://marketingdeconteudo.com/wp-content/uploads/2017/01/formatos-de-imagem-2.jpg" alt="">
+        <div class="name-event"><h2>{{$event->nome}}</h2></div>
+        <a href="{{ url('/event/'.$event->id.'/show') }}" class="btn btn-success">Inscreva-se<i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+    </article>
+    @empty
 
-    <a href="">
+        @endforelse
+
+
+
+
+
+
+   {{-- <a href="">
         <div class="col-lg-3">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row text-center">
-                        <i class="fa fa-users fa-5x"></i>
+                        <img src="https://marketingdeconteudo.com/wp-content/uploads/2017/01/formatos-de-imagem-2.jpg" alt="" width="250px" height="200px">
                     </div>
                 </div>
 
@@ -76,6 +90,6 @@
 
             </div>
         </div>
-    </a>
+    </a>--}}
 
 @endsection
