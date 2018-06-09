@@ -23,8 +23,9 @@
             <th width="5%">
 
             </th>
-            <th class="sortable" width="65%">Programação</th>
-            <th class="sortable" width="65%">Data</th>
+            <th class="sortable" width="40%">Programação</th>
+            <th class="sortable" width="13%">Vagas Disponíveis</th>
+            <th class="sortable" width="25%">Data</th>
             <th class="sortable" width="30%">Detalhes da Atividade</th>
         </tr>
         </thead>
@@ -36,6 +37,9 @@
                 </td>
                 <td style="vertical-align:middle">
                     {{$at->nome}}
+                </td>
+                <td style="vertical-align:middle">
+                    <p align="center">0/0</p>
                 </td>
                 <td style="vertical-align:middle">
                     {{date("d/m/Y",strtotime($at->data_inicio))}} a {{date("d/m/Y",strtotime($at->data_conclusao))}}
