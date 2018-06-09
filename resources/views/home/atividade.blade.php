@@ -51,9 +51,9 @@
                     {{date("d/m/Y",strtotime($at->data_inicio))}} a {{date("d/m/Y",strtotime($at->data_conclusao))}}
                 </td>
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Detalhes</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal{{$at->id}}">Detalhes</button>
 
-                    <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal fade" id="myModal{{$at->id}}" role="dialog">
                         <div class="modal-dialog">
 
                             <div class="modal-content">
