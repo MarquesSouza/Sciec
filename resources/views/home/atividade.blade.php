@@ -22,6 +22,7 @@
 
             </th>
             <th class="sortable" width="65%">Programação</th>
+            <th class="sortable" width="65%">Data</th>
             <th class="sortable" width="30%">Detalhes da Atividade</th>
         </tr>
         </thead>
@@ -33,6 +34,9 @@
                 </td>
                 <td style="vertical-align:middle">
                     {{$at->nome}}
+                </td>
+                <td style="vertical-align:middle">
+                    {{date("d/m/Y",strtotime($at->data_inicio))}} a {{date("d/m/Y",strtotime($at->data_conclusao))}}
                 </td>
                 <td>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Detalhes</button>
@@ -52,11 +56,12 @@
                                     <p>{{$at->descricao}}</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                             <br>
-
+                        </div>
+                    </div>
                 </td>
             </tr>
         @empty
