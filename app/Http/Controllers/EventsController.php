@@ -250,15 +250,13 @@ class EventsController extends Controller
      */
     public function inscricaoEvento(Request $request,$event_id)
     {
-        return $request;
+        $request->atividade;
         $id=Auth::user()->id;
         $users =User::all();
         $user=$users->find($id);
-        $user_evento = ['events_id'=>$event_id];
+        $user_evento = ['events_id'=>$event_id,'user_id'=>$id];
 
-        $user->evento()->sync($user_evento);
-
-
+        dd($user->evento()->sync($user_evento));
     }
     public function detalhes($id)
     {

@@ -47,7 +47,7 @@ class User extends Authenticatable implements Transformable
         return $this->belongsToMany(UserActivityType::class, 'users_activities');
     }
     public function evento(){
-        return $this->belongsToMany( Event::class,'events_users');
+        return $this->belongsToMany( Event::class,'events_users','user_id','events_id');
     }
 
 }
