@@ -270,6 +270,10 @@ class EventsController extends Controller
        // dd($atividade);
 
                 /*return view('events.index', compact('events'));*/
-       return view('home.atividade', compact('event','atividade'));
+       if($event->status==1){
+        return view('home.atividade', compact('event','atividade'));
+    }else{
+           return redirect('home');
+       }
     }
 }

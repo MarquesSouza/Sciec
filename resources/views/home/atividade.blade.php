@@ -1,6 +1,8 @@
 @extends('template.main')
 <br>
 <div style="text-align: center">
+
+
 <h2>{{$event->nome}}</h2>
 <div style="width: 100%; height: 200px;">
     <div>
@@ -76,4 +78,5 @@
 </div>
 </form>
 </div>
+
 </div>
