@@ -7,6 +7,12 @@
         <img class="card-img-top" src="http://www.ifto.edu.br/imagens/logomarcas/logomarca-da-home" alt="logo-evento">
     </div>
     <div>
+       De {{date("d/m/Y",strtotime($event->data_inicio))}} a {{date("d/m/Y",strtotime($event->data_conclusao))}}
+    </div>
+    <div>
+       Local: {{$event->local}}
+    </div>
+    <div>
         {{$event->descricao}}
     </div>
 </div>
