@@ -12,7 +12,7 @@
 </div>
 <div >
 <form action="{{ url('user/event/'.$event->id.'/activity/insc') }}" method="post">
-
+    {{ csrf_field() }}
 <fieldset class="module">
     <legend></legend>
     <table class="table table-hover">
@@ -29,7 +29,7 @@
         @forelse($atividade as $at)
             <tr id="atividade_set-0" class="row1">
                 <td align="center" style="vertical-align:middle">
-                    <input type="checkbox" name="atividade" value="1051" id="{{$at->id}}" style="float:none">
+                    <input type="checkbox" name="atividade[]" value="{{$at->id}}" style="float:none">
                 </td>
                 <td style="vertical-align:middle">
                     {{$at->nome}}
@@ -67,7 +67,7 @@
 </fieldset>
 <hr>
 <div style="text-align: center" class="submit-row">
-    <input type="submit" class="btn btn-success" name="salvar" value="Inscrever">
+    <input type="submit" class="btn btn-success" value="Inscrever">
 </div>
 </form>
 </div>
