@@ -250,6 +250,7 @@ class EventsController extends Controller
      */
     public function inscricaoEvento(Request $request,$event_id)
     {
+        if(Auth::check()){
         $request->atividade;
         $id=Auth::user()->id;
         $users =User::all();
@@ -257,6 +258,9 @@ class EventsController extends Controller
         $user_evento = ['events_id'=>$event_id,'user_id'=>$id];
 
         dd($user->evento()->sync($user_evento));
+        }else{
+           return redirect('login');
+        }
     }
     public function detalhes($id)
     {
