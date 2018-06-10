@@ -269,6 +269,7 @@ class EventsController extends Controller
         $userActivi=new UsersActivity();
         $lista=$request->atividade;
         //dd();
+        $colizoes[]="";
         $colizao=$userActivi->colisaoAtividade($event_id);
         foreach ($colizao as $item=>$value){
             $a=$atividade->find($item);
@@ -283,17 +284,17 @@ class EventsController extends Controller
                                    $count++;                            }
                                if($count>1){
                                return $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
-                       }}}
-
+                                }
+                           }
+                       }
                 }
-
-
-
             }
-
-
-
         }
+        if($colizoes[0]==""){
+            //cadastro das atividades
+        }
+
+
     }
     public function detalhes($id)
     {
