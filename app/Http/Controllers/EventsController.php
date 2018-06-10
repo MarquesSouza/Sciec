@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Activity;
 use App\Entities\Event;
+use App\Entities\EventsUser;
 use App\Entities\Institution;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
@@ -250,17 +251,19 @@ class EventsController extends Controller
      */
     public function inscricaoEvento(Request $request,$event_id)
     {
-       // if(Auth::check()){
         $request->atividade;
         $id=Auth::user()->id;
+        $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
+        if($event_user=='null'){ //Aqui se nao tiver inscrição no evento ele se inscreve arrumar o create_at e update_at
         $users =User::all();
         $user=$users->find($id);
         $user_evento = ['events_id'=>$event_id,'user_id'=>$id];
+        $user->evento()->sync($user_evento);
+        }
+        // etapa 1 se ja esta inscritos
 
-        dd($user->evento()->sync($user_evento));
-       // }else{
-       //    return redirect('login');
-       // }
+        // etapa 2 colizao de atividades
+
     }
     public function detalhes($id)
     {
