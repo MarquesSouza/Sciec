@@ -267,14 +267,30 @@ class EventsController extends Controller
         // etapa 2 colizao de atividades
         $atividade=Activity::all();
         $userActivi=new UsersActivity();
-      //  dd($request->atividade);
+        $lista=$request->atividade;
+        //dd();
         $colizao=$userActivi->colisaoAtividade($event_id);
         foreach ($colizao as $item=>$value){
             $a=$atividade->find($item);
-               foreach ($value as $inde=>$item2){
-                    $b=$atividade->find($item2);
-                    return $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
-               }
+            for($i=0;$i<count($lista);$i++){
+                $count=0;
+                if($item==$lista[$i]){
+                 $count++;
+                       foreach ($value as $inde=>$item2){
+                           $b=$atividade->find($item2);
+                           for($i=0;$i<count($lista);$i++) {
+                               if($item2==$lista[$i]){
+                                   $count++;                            }
+                               if($count>1){
+                               return $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
+                       }}}
+
+                }
+
+
+
+            }
+
 
 
         }
