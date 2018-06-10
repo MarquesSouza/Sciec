@@ -144,7 +144,7 @@ class PopulacaoSeeder extends Seeder
             'nome' => 'Minicurso Robótica - Robô Lego',
             'descricao' => 'Introdução a robótica utilizando robô de lego',
             'local' => 'IFTO - Campus Paraíso do Tocantins - TO',
-            'data_inicio' => '2018-06-09 14:00:00',
+            'data_inicio' => '2011-03-15 06:01:52',
             'data_conclusao' => '2018-06-08 18:00:00',
             'horas' => '04:00:00',
             'qtd_inscritos' => '100',

@@ -6,6 +6,7 @@ use App\Entities\Activity;
 use App\Entities\Event;
 use App\Entities\EventsUser;
 use App\Entities\Institution;
+use App\Entities\UsersActivity;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -255,6 +256,7 @@ class EventsController extends Controller
         $id=Auth::user()->id;
         $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
         if($event_user=='null'){ //Aqui se nao tiver inscrição no evento ele se inscreve arrumar o create_at e update_at
+        //Date('Y-m-d H:i:s') função para adicionar data atual
         $users =User::all();
         $user=$users->find($id);
         $user_evento = ['events_id'=>$event_id,'user_id'=>$id];
@@ -263,14 +265,25 @@ class EventsController extends Controller
         // etapa 1 se ja esta inscritos
 
         // etapa 2 colizao de atividades
-
+        $atividade=Activity::all();
+        $userActivi=new UsersActivity();
+        $colizao=$userActivi->colisaoAtividade($event_id);
+       //dd($colizao);
+       foreach ($colizao as $item=>$value){
+           foreach ($value as $inde=>$item2){
+                    $a=$atividade->find($item);
+                    $b=$atividade->find($item2);
+                    $colizoes="colizao atividades : ". $a->nome." e ". $b->nome;
+                    return $colizoes;
+           }
+    }
     }
     public function detalhes($id)
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $event = $this->repository->find($id);
         $atividade= Activity::all()->where('events_id','=',$id);
-       // dd($atividade);
+      //  dd($atividade);
 
                 /*return view('events.index', compact('events'));*/
        if($event->status==1){
