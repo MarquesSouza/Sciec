@@ -255,16 +255,14 @@ class EventsController extends Controller
         $request->atividade;
         $id=Auth::user()->id;
         $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
-        if($event_user=='null'){ //Aqui se nao tiver inscrição no evento ele se inscreve arrumar o create_at e update_at
-        //Date('Y-m-d H:i:s') função para adicionar data atual
-        $users =User::all();
-        $user=$users->find($id);
-        $user_evento = ['events_id'=>$event_id,'user_id'=>$id];
-        $user->evento()->sync($user_evento);
-        }
-        // etapa 1 se ja esta inscritos
+        if($event_user=='null'){
+            $userEvent= new EventsUser();
+            $userEvent->user_id = Auth::user()->id;
+            $userEvent->events_id = $id;
+            $userEvent->save();
+             }
 
-        // etapa 2 colizao de atividades
+        // etapa 1 colizao de atividades
         $atividade=Activity::all();
         $userActivi=new UsersActivity();
         $lista=$request->atividade;
@@ -291,6 +289,22 @@ class EventsController extends Controller
             }
         }
         if($colizoes[0]==""){
+            // etapa 1 se ja esta inscritos
+            for($i=0;$i<count($lista);$i++){
+            $ativi_user=UsersActivity::all()->where('user_id','=',$id)->where('activity_id','=',$lista[$i]);
+          //  dd($ativi_user);
+                if($ativi_user=='null'){
+                    $atividade_user= new UsersActivity();
+                    $atividade_user->user_id= Auth::user()->id;
+                    $atividade_user->activity_id=$lista[$i];
+                    $atividade_user->presenca=0;
+                    $atividade_user->user_activity_types_id=1;
+                    $atividade_user->save();
+                    return "Cadastrado com sucesso!";
+                }
+
+            }
+
             //cadastro das atividades
         }
 
