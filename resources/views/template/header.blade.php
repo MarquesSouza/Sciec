@@ -35,7 +35,7 @@
                             class="caret"></b></a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                        <li><a href="{{ url('/user/index') }}"><i class="fa fa-user"></i> Perfil</a></li>
                         <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
                         <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
                         <li class="divider"></li>

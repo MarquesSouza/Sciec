@@ -172,5 +172,6 @@ Route::put('inst/update/{id}', 'InstitutionsController@update');
 Route::post('user/activity/insc', 'UsersController@inscricao');
 
 Route::get('certificado/index', 'UsersController@certificado');
-Route::post('register/user', 'UsersController@store')->name('register.user');
+Route::get('user/index', 'UsersController@index');
+
 

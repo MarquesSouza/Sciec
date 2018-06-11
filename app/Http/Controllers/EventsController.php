@@ -256,8 +256,9 @@ class EventsController extends Controller
         $id=Auth::user()->id;
         $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
         if($event_user=='null'){
-            $userEvent= EventsUser::create(['user_id'=>Auth::user()->id,'events_id'=>$id]);
-             }
+            $userEvent= EventsUser::create(['user_id'=>Auth::user()->id,'events_id'=>$id])->id;
+                     dd($userEvent);
+        }
 
         // etapa 1 colizao de atividades
         $atividade=Activity::all();
