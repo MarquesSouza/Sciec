@@ -1,5 +1,7 @@
 @extends('template.main')
 
-Sucesso
-
-Ok
+@if ($sucesso)
+    I have one record!
+@else
+    I don't have any records!
+@endif

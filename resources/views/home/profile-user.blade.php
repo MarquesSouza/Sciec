@@ -7,7 +7,6 @@
                     <span class="label label-default titulo-eventos">Perfil</span>
                 </div>
 
-				
     			<div class="row"><br/>
     			</div>
     			<div class="row"><br/></div>
