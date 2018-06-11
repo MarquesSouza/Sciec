@@ -8,7 +8,7 @@
         <form class="form-horizontal" method="post" action="{{ url('usuario/'.$user->id.'/update') }}">
             {!! method_field('PUT') !!}
             @else
-                <form class="form-horizontal" method="post" action="{{ route('register')}}">
+                <form class="form-horizontal" method="post" action="{{ route('register.user')}}">
                     @endif
                     {{csrf_field()}}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -106,6 +106,21 @@
                             @if ($errors->has('telefone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('telefone') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('celular') ? ' has-error' : '' }}">
+                        <label for="celular" class="col-md-4 control-label">Celular</label>
+
+                        <div class="col-md-6">
+                            <input id="celular" type="text" class="form-control" name="celular"
+                                   value="{{$user->celular or old('celular') }}" required autofocus>
+
+                            @if ($errors->has('celular'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('celular') }}</strong>
                                     </span>
                             @endif
                         </div>

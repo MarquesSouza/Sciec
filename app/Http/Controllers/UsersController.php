@@ -99,8 +99,8 @@ class UsersController extends Controller
             $request['password']= bcrypt($request->input('password'));
             $user = $this->repository->create($request->all());
 
-            $dataform = $request['tipousuario'];
-            $user->tipoUsuario()->sync($dataform);
+            /*$dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);*/
 
 
             $response = [
@@ -113,8 +113,8 @@ class UsersController extends Controller
                 return response()->json($response);
             }
 
-            return $response;
-            //return redirect()->back()->with('message', $response['message']);
+
+            return redirect('/')->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -123,7 +123,7 @@ class UsersController extends Controller
                 ]);
             }
 
-            return $e->getMessageBag();
+            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

@@ -76,8 +76,8 @@ class RegisterController extends Controller
             'remember_token' => str_random(10)
         ]);
 
-        $dataform = $data['tipousuario'];
+        /*$dataform = $data['tipousuario'];
         $user->tipoUsuario()->sync($dataform);
-        return $user;
+        return $user;*/
     }
 }
