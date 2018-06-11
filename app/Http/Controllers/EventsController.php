@@ -280,7 +280,7 @@ class EventsController extends Controller
                                    $count++;                            }
                                if($count>1){
                                $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
-                                   $sucesso = "false";
+                                   $sucesso = 0;
                                    return view('events.concluido', compact('sucesso','colizoes'));
                                 }
                            }
@@ -295,12 +295,12 @@ class EventsController extends Controller
           //  dd($ativi_user);
                 if($ativi_user=='null'){
                     $atividade_user=UsersActivity::create(['user_id'=>Auth::user()->id,'activity_id'=>$lista[$i],'presenca'=>0,'user_activity_types_id'=>1]);
-                    $sucesso = "true";
+                    $sucesso = 1;
                     return view('events.concluido', compact('sucesso','colizoes'));
-                }
-                $sucesso = "true";
+                }else{
+                $sucesso = 1;
                 return view('events.concluido', compact('sucesso','colizoes'));
-            }
+                } }
 
 
         }
