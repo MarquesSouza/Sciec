@@ -62,7 +62,17 @@ class UsersController extends Controller
           }
 
           return view('users.index', compact('users'));*/
-        return "user admin";
+        $user = $this->repository->find(auth()->user()->id);
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $user,
+            ]);
+        }
+      //  return $user;
+
+        return view('home/profile-user', compact('user'));
     }
 
     public function teste()
