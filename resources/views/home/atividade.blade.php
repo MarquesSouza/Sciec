@@ -35,7 +35,7 @@
                     {{$at->nome}}
                 </td>
                 <td>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Detalhes</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Detalhes</button>
 
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">

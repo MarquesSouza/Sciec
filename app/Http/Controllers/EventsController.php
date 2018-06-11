@@ -265,7 +265,6 @@ class EventsController extends Controller
         $event = $this->repository->find($id);
         $atividade= Activity::all()->where('events_id','=',$id);
 
-
                 /*return view('events.index', compact('events'));*/
         return view('home.atividade', compact('event','atividade'));
     }
