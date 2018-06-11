@@ -298,7 +298,8 @@ class EventsController extends Controller
                     $sucesso = "true";
                     return view('events.concluido', compact('sucesso','colizoes'));
                 }
-
+                $sucesso = "true";
+                return view('events.concluido', compact('sucesso','colizoes'));
             }
 
 
