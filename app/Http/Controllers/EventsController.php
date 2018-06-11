@@ -279,9 +279,9 @@ class EventsController extends Controller
                                if($item2==$lista[$i]){
                                    $count++;                            }
                                if($count>1){
-                               $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
+                               $colizoes[]= "(".$a->nome.") e o (". $b->nome. ") Atividades ocorrem nas mesma data ou horario! Escolha apenas uma!";
                                    $sucesso = 0;
-                                   return view('events.concluido', compact('sucesso','colizoes'));
+                                    return view('events.concluido', compact('sucesso','colizoes'));
                                 }
                            }
                        }
