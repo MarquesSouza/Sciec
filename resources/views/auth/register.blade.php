@@ -151,6 +151,7 @@
                         </div>
                     </div>--}}
                     <input type="hidden" id="status" name="status" value="1">
+                    <input type="hidden"  name="tipousuario[]" value="3">
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">

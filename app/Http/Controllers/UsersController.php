@@ -109,8 +109,8 @@ class UsersController extends Controller
             $request['password']= bcrypt($request->input('password'));
             $user = $this->repository->create($request->all());
 
-            /*$dataform = $request['tipousuario'];
-            $user->tipoUsuario()->sync($dataform);*/
+            $dataform = $request['tipousuario'];
+            $user->tipoUsuario()->sync($dataform);
 
 
             $response = [
