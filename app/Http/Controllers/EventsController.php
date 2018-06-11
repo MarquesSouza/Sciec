@@ -256,10 +256,7 @@ class EventsController extends Controller
         $id=Auth::user()->id;
         $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
         if($event_user=='null'){
-            $userEvent= new EventsUser();
-            $userEvent->user_id = Auth::user()->id;
-            $userEvent->events_id = $id;
-            $userEvent->save();
+            $userEvent= EventsUser::create(['user_id'=>Auth::user()->id,'events_id'=>$id]);
              }
 
         // etapa 1 colizao de atividades
@@ -294,12 +291,7 @@ class EventsController extends Controller
             $ativi_user=UsersActivity::all()->where('user_id','=',$id)->where('activity_id','=',$lista[$i]);
           //  dd($ativi_user);
                 if($ativi_user=='null'){
-                    $atividade_user= new UsersActivity();
-                    $atividade_user->user_id= Auth::user()->id;
-                    $atividade_user->activity_id=$lista[$i];
-                    $atividade_user->presenca=0;
-                    $atividade_user->user_activity_types_id=1;
-                    $atividade_user->save();
+                    $atividade_user=UsersActivity::create(['user_id'=>Auth::user()->id,'activity_id'=>$lista[$i],'presenca'=>0,'user_activity_types_id'=>1]);
                     return "Cadastrado com sucesso!";
                 }
 
