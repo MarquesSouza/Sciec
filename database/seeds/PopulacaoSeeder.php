@@ -153,6 +153,18 @@ class PopulacaoSeeder extends Seeder
             'events_id' => '1',
         ]);
         App\Entities\Activity::create([
+            'nome' => 'Minicurso Introdução a Robótica ',
+            'descricao' => 'Introdução ao conceitos da robótica ',
+            'local' => 'IFTO - Campus Paraíso do Tocantins - TO',
+            'data_inicio' => '2011-03-15 06:01:52',
+            'data_conclusao' => '2018-06-08 18:00:00',
+            'horas' => '04:00:00',
+            'qtd_inscritos' => '100',
+            'status' => '1',
+            'type_activity_id'=> '3',
+            'events_id' => '1',
+        ]);
+        App\Entities\Activity::create([
             'nome' => 'Como Empreender Com Sucesso',
             'descricao' => 'Palestra sobre o que saber para empreender com sucesso',
             'local' => 'IFTO - Campus Paraíso do Tocantins - TO',
