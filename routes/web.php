@@ -158,7 +158,7 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
 
         Route::prefix('{event_id}/activity')->group(function () { /** Rotas de Inscrição na Atividade */
             Route::get('show', 'ActivitiesController@atividades')->name('');
-            Route::post('insc', 'EventsController@inscricaoEvento')->name('');
+            Route::post('insc', 'EventsController@inscricaoEvento')->middleware('auth');
 
         });
             Route::get('{event_id}/certificate', 'UsersController@certificado')->name('');
@@ -166,8 +166,10 @@ Route::prefix('user')->group(function () {   /** Rotas do Usuario */
         });
 
 });
-Route::get('/event/{id}/show', 'EventsController@detalhes');
+Route::get('/event/{id}/show', 'EventsController@detalhes')->middleware('auth');
 Route::put('event/update/{id}', 'EventsController@update');
 Route::put('inst/update/{id}', 'InstitutionsController@update');
 Route::post('user/activity/insc', 'UsersController@inscricao');
+
+Route::get('certificado/index', 'UsersController@certificado');
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Entities\Activity;
 use App\Entities\Event;
+use App\Entities\EventsUser;
 use App\Entities\Institution;
+use App\Entities\UsersActivity;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -248,14 +250,63 @@ class EventsController extends Controller
      * @param $event_id
      * @return array
      */
-    public function inscricao(Request $request,$event_id)
+    public function inscricaoEvento(Request $request,$event_id)
     {
+        $request->atividade;
         $id=Auth::user()->id;
-        $users =User::all();
-        $user=$users->find($id);
-        $user_evento = ['events_id'=>$event_id];
+        $event_user=EventsUser::all()->where('user_id','=',$id)->where('events_id','=',$event_id);
+        if($event_user=='null'){
+            $userEvent= new EventsUser();
+            $userEvent->user_id = Auth::user()->id;
+            $userEvent->events_id = $id;
+            $userEvent->save();
+             }
 
-        $user->evento()->sync($user_evento);
+        // etapa 1 colizao de atividades
+        $atividade=Activity::all();
+        $userActivi=new UsersActivity();
+        $lista=$request->atividade;
+        //dd();
+        $colizoes[]="";
+        $colizao=$userActivi->colisaoAtividade($event_id);
+        foreach ($colizao as $item=>$value){
+            $a=$atividade->find($item);
+            for($i=0;$i<count($lista);$i++){
+                $count=0;
+                if($item==$lista[$i]){
+                 $count++;
+                       foreach ($value as $inde=>$item2){
+                           $b=$atividade->find($item2);
+                           for($i=0;$i<count($lista);$i++) {
+                               if($item2==$lista[$i]){
+                                   $count++;                            }
+                               if($count>1){
+                               return $colizoes[]= $a->nome." <br>" . $b->nome. "<br> Atividades ocorrem nas mesma data ou horario!<br> Escolha apenas uma!";
+                                }
+                           }
+                       }
+                }
+            }
+        }
+        if($colizoes[0]==""){
+            // etapa 1 se ja esta inscritos
+            for($i=0;$i<count($lista);$i++){
+            $ativi_user=UsersActivity::all()->where('user_id','=',$id)->where('activity_id','=',$lista[$i]);
+          //  dd($ativi_user);
+                if($ativi_user=='null'){
+                    $atividade_user= new UsersActivity();
+                    $atividade_user->user_id= Auth::user()->id;
+                    $atividade_user->activity_id=$lista[$i];
+                    $atividade_user->presenca=0;
+                    $atividade_user->user_activity_types_id=1;
+                    $atividade_user->save();
+                    return "Cadastrado com sucesso!";
+                }
+
+            }
+
+            //cadastro das atividades
+        }
 
 
     }
@@ -264,8 +315,13 @@ class EventsController extends Controller
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $event = $this->repository->find($id);
         $atividade= Activity::all()->where('events_id','=',$id);
+      //  dd($atividade);
 
                 /*return view('events.index', compact('events'));*/
+       if($event->status==1){
         return view('home.atividade', compact('event','atividade'));
+    }else{
+           return redirect('home');
+       }
     }
 }

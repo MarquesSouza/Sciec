@@ -5,6 +5,7 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UsersActivity.
@@ -40,7 +41,7 @@ class UsersActivity extends Model implements Transformable
     }
     public function colisaoAtividade($id_evento){
         $atividade = Activity::all();
-        $activities = $atividade->where('id_evento', '=', $id_evento);
+        $activities = $atividade->where('events_id', '=', $id_evento);
         //dd($activities);
         $activitiesEspelho=$activities;
         foreach ($activities as $ativi){
@@ -58,11 +59,11 @@ class UsersActivity extends Model implements Transformable
                 }
                 if(!isset($data)){
                 }else{
-                    $teste[$ativi->id]=$data;
+                    $colisao[$ativi->id]=$data;
                     unset($data);
                 }
             };
         };
-        return $teste;
+        return $colisao;
     }
 }
