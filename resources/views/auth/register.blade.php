@@ -96,20 +96,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}">
-                        <label for="telefone" class="col-md-4 control-label">Telefone</label>
+                    {{--<div class="form-group{{ $errors->has('telefone') ? ' has-error' : '' }}">--}}
+                        {{--<label for="telefone" class="col-md-4 control-label">Telefone</label>--}}
 
-                        <div class="col-md-6">
-                            <input id="telefone" type="text" class="form-control" name="telefone"
-                                   value="{{$user->telefone or old('telefone') }}" required autofocus>
+                        {{--<div class="col-md-6">--}}
+                            {{--<input id="telefone" type="text" class="form-control" name="telefone"--}}
+                                   {{--value="{{$user->telefone or old('telefone') }}" required autofocus>--}}
 
-                            @if ($errors->has('telefone'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('telefone') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
+                            {{--@if ($errors->has('telefone'))--}}
+                                {{--<span class="help-block">--}}
+                                        {{--<strong>{{ $errors->first('telefone') }}</strong>--}}
+                                    {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <div class="form-group{{ $errors->has('celular') ? ' has-error' : '' }}">
                         <label for="celular" class="col-md-4 control-label">Celular</label>

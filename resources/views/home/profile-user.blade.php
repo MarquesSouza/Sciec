@@ -20,10 +20,10 @@
 										<div class="table-responsive">
 											<table class="table table-condensed table-responsive table-user-information">
 												<tbody>
-													<tr>
-														<td><strong><span class="glyphicon glyphicon-asterisk text-primary"></span> Tipo de Perfil:</strong></td>
-														<td class="text-primary">Participante</td>
-													</tr>
+													{{--<tr>--}}
+														{{--<td><strong><span class="glyphicon glyphicon-asterisk text-primary"></span> Tipo de Perfil:</strong></td>--}}
+														{{--<td class="text-primary">Participante</td>--}}
+													{{--</tr>--}}
 														<tr><td><strong><span class="glyphicon glyphicon-user  text-primary"></span> Nome:</strong></td>
 														<td class="text-primary">{{$user->name}}</td></tr>
 													<tr>
