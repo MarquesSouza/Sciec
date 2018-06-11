@@ -43,6 +43,7 @@ class UsersActivity extends Model implements Transformable
         $atividade = Activity::all();
         $activities = $atividade->where('events_id', '=', $id_evento);
         //dd($activities);
+        $colisao[]="";
         $activitiesEspelho=$activities;
         foreach ($activities as $ativi){
             $dataIni = new \DateTime($ativi->data_inicio);
