@@ -260,4 +260,5 @@ class ActivitiesController extends Controller
         return $userActivity;
     }
 
+
 }

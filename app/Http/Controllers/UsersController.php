@@ -287,8 +287,11 @@ class UsersController extends Controller
 //    }
 
 
-    public function certificado()
+    public function certificado($event_id)
     {
+        $id=Auth::user()->id;
+        $atividade=Activity::all()->where('events_id','=',$event_id);
+
         return view('certificado.certificado', compact('certificado'));
     }
 
